@@ -1,0 +1,176 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  tr: Translations;
+  lang: string;
+}
+
+const { tr, lang } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-content">
+      <p class="label hero-badge">{tr.hero.badge}</p>
+
+      <h1 class="hero-title">
+        <span class="hero-title-main">A.Lopes</span>
+        <span class="hero-title-accent">Doodles</span>
+      </h1>
+
+      <p class="hero-tagline">{tr.hero.tagline}</p>
+      <p class="hero-subtitle">{tr.hero.subtitle}</p>
+
+      <div class="hero-cta">
+        <a href={`/${lang}/portfolio`} class="btn btn-primary">{tr.hero.cta}</a>
+        <a href={`/${lang}/contact`} class="btn btn-outline">{tr.hero.ctaSecondary}</a>
+      </div>
+    </div>
+
+    <div class="hero-deco" aria-hidden="true">
+      <!-- TODO: substituir pela imagem do logo real (public/logo.png) -->
+      <div class="hero-logo-placeholder">
+        <div class="hlp-circle">
+          <div class="hlp-inner">
+            <span class="hlp-name">A.Lopes</span>
+            <em class="hlp-sub">Doodles</em>
+            <span class="hlp-label">3D</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+</section>
+
+<style>
+  .hero {
+    min-height: calc(90vh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+  }
+
+  /* Content */
+  .hero-badge { margin-bottom: 2rem; }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.02;
+    margin-bottom: 1.75rem;
+  }
+  .hero-title-main {
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    color: var(--navy);
+  }
+  .hero-title-accent {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--dark);
+    opacity: 0.65;
+    max-width: 38rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Decorative logo placeholder */
+  .hero-deco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-logo-placeholder {
+    width: clamp(260px, 30vw, 380px);
+    aspect-ratio: 1;
+  }
+
+  .hlp-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 8px solid var(--terracotta);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 0 4px var(--navy), 0 0 0 8px rgba(196, 83, 42, 0.3);
+  }
+
+  .hlp-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .hlp-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+  }
+  .hlp-sub {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-style: italic;
+    color: var(--cream);
+  }
+  .hlp-label {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hero-badge, .hero-tagline { justify-content: center; }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
+    .hero-deco { order: -1; }
+    .hero-logo-placeholder { width: clamp(180px, 45vw, 260px); }
+  }
+</style>

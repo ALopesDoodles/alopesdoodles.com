@@ -1,0 +1,236 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  lang: string;
+  currentPage: 'home' | 'portfolio' | 'about' | 'contact';
+  tr: Translations;
+}
+
+const { lang, currentPage, tr } = Astro.props;
+
+const pages = {
+  home:      { pt: '/pt',           es: '/es',           en: '/en'           },
+  portfolio: { pt: '/pt/portfolio', es: '/es/portfolio', en: '/en/portfolio' },
+  about:     { pt: '/pt/about',     es: '/es/about',     en: '/en/about'     },
+  contact:   { pt: '/pt/contact',   es: '/es/contact',   en: '/en/contact'   },
+} as const;
+
+const base = `/${lang}`;
+const nav = [
+  { key: 'home',      href: base,                  label: tr.nav.home      },
+  { key: 'portfolio', href: `${base}/portfolio`,    label: tr.nav.portfolio },
+  { key: 'about',     href: `${base}/about`,        label: tr.nav.about     },
+  { key: 'contact',   href: `${base}/contact`,      label: tr.nav.contact   },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <!-- Logo -->
+    <a href={base} class="logo" aria-label="A.Lopes Doodles — Início">
+      <span class="logo-main">A.Lopes</span>
+      <span class="logo-sub">Doodles</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      {nav.map(item => (
+        <a
+          href={item.href}
+          class:list={['nav-link', { active: currentPage === item.key }]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Language switcher + hamburger -->
+    <div class="header-right">
+      <div class="lang-switcher" aria-label="Idioma">
+        {(['pt', 'es', 'en'] as const).map((l, i) => (
+          <>
+            {i > 0 && <span class="lang-sep">|</span>}
+            <a
+              href={pages[currentPage][l]}
+              class:list={['lang-link', { active: lang === l }]}
+              hreflang={l}
+            >
+              {l.toUpperCase()}
+            </a>
+          </>
+        ))}
+      </div>
+
+      <button class="hamburger" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <nav class="nav-mobile" id="mobile-nav" aria-label="Menu mobile">
+    {nav.map(item => (
+      <a
+        href={item.href}
+        class:list={['nav-mobile-link', { active: currentPage === item.key }]}
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = mobileNav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--off-white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    gap: 2rem;
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    flex-shrink: 0;
+  }
+  .logo-main {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .logo-sub {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--terracotta);
+    letter-spacing: 0.04em;
+  }
+
+  /* Desktop nav */
+  .nav-desktop {
+    display: flex;
+    gap: 2.25rem;
+  }
+  .nav-link {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 1px;
+    background: var(--terracotta);
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover,
+  .nav-link.active { color: var(--navy); }
+  .nav-link:hover::after,
+  .nav-link.active::after { width: 100%; }
+
+  /* Header right */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  /* Language switcher */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .lang-link {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--light-gray);
+    transition: color 0.2s;
+  }
+  .lang-link:hover,
+  .lang-link.active { color: var(--terracotta); }
+  .lang-sep {
+    font-size: 0.6rem;
+    color: var(--border);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 4px;
+    width: 28px;
+    height: 28px;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--navy);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  /* Mobile nav */
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+    padding: 0.5rem var(--px) 1rem;
+  }
+  .nav-mobile.is-open { display: flex; }
+  .nav-mobile-link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .nav-mobile-link:last-child { border-bottom: none; }
+  .nav-mobile-link:hover,
+  .nav-mobile-link.active { color: var(--terracotta); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-desktop { display: none; }
+    .hamburger   { display: flex; }
+  }
+</style>

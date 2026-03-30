@@ -1,0 +1,166 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'pt' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const tr = t(lang);
+const a = tr.about;
+---
+
+<Layout lang={lang} title={a.heading} description={a.body1}>
+  <Header lang={lang} currentPage="about" tr={tr} />
+  <main>
+
+    <section class="section page-hero">
+      <div class="container">
+        <p class="label">{a.label}</p>
+        <h1 class="section-title">{a.heading}</h1>
+      </div>
+    </section>
+    <hr class="divider" />
+
+    <section class="section about-section">
+      <div class="container about-grid">
+
+        <!-- Photo placeholder -->
+        <div class="about-photo-wrap">
+          <!--
+            TODO: substituir pela tua foto real.
+            Coloca a imagem em public/about-photo.jpg e usa:
+            <img src="/about-photo.jpg" alt="António Lopes" class="about-photo" />
+          -->
+          <div class="ph-img ph-img--navy about-photo-placeholder" aria-label="Foto placeholder">
+            <span class="ph-img__label">FOTO</span>
+            <div class="about-photo-initials">AL</div>
+          </div>
+          <div class="about-origin">
+            <span class="label">{a.location}</span>
+          </div>
+        </div>
+
+        <!-- Text content -->
+        <div class="about-content">
+          <h2 class="about-name">António Lopes</h2>
+          <p class="about-body">{a.body1}</p>
+          <p class="about-body">{a.body2}</p>
+
+          <!-- Stats placeholder -->
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">—</span>
+              <span class="stat-label">Projetos</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">—</span>
+              <span class="stat-label">Clientes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">—</span>
+              <span class="stat-label">Anos</span>
+            </div>
+          </div>
+
+          <a href={`/${lang}/contact`} class="btn btn-primary">{tr.nav.contact}</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <Footer tr={tr} lang={lang} />
+</Layout>
+
+<style>
+  .page-hero { padding-bottom: 3rem; }
+  .page-hero .label { margin-bottom: 0.75rem; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  /* Photo */
+  .about-photo-wrap { position: relative; }
+
+  .about-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-photo-initials {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    font-weight: 400;
+    color: rgba(232, 212, 176, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-origin {
+    margin-top: 1.25rem;
+  }
+
+  /* Content */
+  .about-name {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 2rem;
+  }
+
+  .about-body {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 0.25rem; }
+
+  .stat-number {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .about-photo-placeholder { aspect-ratio: 4/3; }
+  }
+</style>

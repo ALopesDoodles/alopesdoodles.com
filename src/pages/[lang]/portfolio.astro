@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
+import { t } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'pt' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const tr = t(lang);
+---
+
+<Layout lang={lang} title={tr.portfolio.heading} description={tr.portfolio.subheading}>
+  <Header lang={lang} currentPage="portfolio" tr={tr} />
+  <main>
+    <section class="section page-hero">
+      <div class="container">
+        <p class="label">{tr.portfolio.heading}</p>
+        <h1 class="section-title">{tr.portfolio.subheading}</h1>
+      </div>
+    </section>
+    <hr class="divider" />
+
+    <section class="section">
+      <div class="container">
+        <GalleryGrid tr={tr} />
+      </div>
+    </section>
+  </main>
+  <Footer tr={tr} lang={lang} />
+</Layout>
+
+<style>
+  .page-hero { padding-bottom: 3rem; }
+  .page-hero .label { margin-bottom: 0.75rem; }
+</style>
