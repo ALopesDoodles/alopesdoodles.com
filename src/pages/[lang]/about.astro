@@ -17,9 +17,9 @@ const tr = t(lang);
 const a = tr.about;
 ---
 
-<Layout lang={lang} title={a.heading} description={a.body1}>
+<Layout lang={lang} title={tr.seo.about.title} description={tr.seo.about.description} canonicalPath={`/${lang}/about`}>
   <Header lang={lang} currentPage="about" tr={tr} />
-  <main>
+  <main id="main-content" tabindex="-1">
 
     <section class="section page-hero">
       <div class="container">
@@ -53,22 +53,6 @@ const a = tr.about;
           <h2 class="about-name">António Lopes</h2>
           <p class="about-body">{a.body1}</p>
           <p class="about-body">{a.body2}</p>
-
-          <!-- Stats placeholder -->
-          <div class="about-stats">
-            <div class="stat">
-              <span class="stat-number">—</span>
-              <span class="stat-label">Projetos</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">—</span>
-              <span class="stat-label">Clientes</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">—</span>
-              <span class="stat-label">Anos</span>
-            </div>
-          </div>
 
           <a href={`/${lang}/contact`} class="btn btn-primary">{tr.nav.contact}</a>
         </div>
@@ -129,31 +113,6 @@ const a = tr.about;
     color: var(--gray);
     line-height: 1.85;
     margin-bottom: 1.5rem;
-  }
-
-  .about-stats {
-    display: flex;
-    gap: 3rem;
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2.5rem;
-  }
-
-  .stat { display: flex; flex-direction: column; gap: 0.25rem; }
-
-  .stat-number {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--terracotta);
-  }
-
-  .stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray);
   }
 
   @media (max-width: 900px) {

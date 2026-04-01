@@ -7,43 +7,48 @@ interface Props {
 
 const { tr } = Astro.props;
 
-// 12 placeholder items — substituir com imagens reais e dados reais
 const items = [
-  { id: 1,  category: 'printing', color: 'navy',  aspect: '4/3',  title: 'Peça Personalizada #1',  desc: 'Placeholder — PLA, 0.2mm' },
-  { id: 2,  category: 'printing', color: 'moss',  aspect: '1/1',  title: 'Miniatura #1',           desc: 'Placeholder — Resina' },
-  { id: 3,  category: 'printing', color: 'slate', aspect: '3/4',  title: 'Protótipo #1',           desc: 'Placeholder — PETG' },
-  { id: 4,  category: 'printing', color: 'navy',  aspect: '4/3',  title: 'Peça Personalizada #2',  desc: 'Placeholder — PLA' },
-  { id: 5,  category: 'laser',    color: 'terra', aspect: '4/3',  title: 'Gravação em Madeira #1', desc: 'Placeholder — MDF 3mm' },
-  { id: 6,  category: 'laser',    color: 'warm',  aspect: '1/1',  title: 'Gravação em Acrílico',  desc: 'Placeholder — Acrílico transparente' },
-  { id: 7,  category: 'laser',    color: 'slate', aspect: '3/4',  title: 'Gravação em Couro',     desc: 'Placeholder — Couro natural' },
-  { id: 8,  category: 'laser',    color: 'terra', aspect: '4/3',  title: 'Gravação em Madeira #2', desc: 'Placeholder — Pinho' },
-  { id: 9,  category: 'painting', color: 'cream', aspect: '1/1',  title: 'Miniatura Pintada #1',  desc: 'Placeholder — Acrílico' },
-  { id: 10, category: 'painting', color: 'warm',  aspect: '4/3',  title: 'Arte sobre Tela #1',    desc: 'Placeholder — Acrílico sobre tela' },
-  { id: 11, category: 'painting', color: 'moss',  aspect: '3/4',  title: 'Miniatura Pintada #2',  desc: 'Placeholder — Óleo' },
-  { id: 12, category: 'painting', color: 'cream', aspect: '4/3',  title: 'Arte sobre Tela #2',    desc: 'Placeholder — Técnica mista' },
+  // Mini-eu
+  { id: 1,  src: '/gallery/mini-eu-carocha.png',        category: 'miniEu',       aspect: '1/1', alt: 'Diorama em miniatura com Carocha VW, árvore e banco de jardim, pintado à mão' },
+  { id: 2,  src: '/gallery/mini-eu-casamento.png',       category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de casal no bolo de casamento, figuras estilo Funko personalizadas' },
+  { id: 3,  src: '/gallery/mini-eu-ciclista-cao.png',    category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de ciclista MTB com bicicleta laranja e cão em diorama de floresta' },
+  { id: 4,  src: '/gallery/mini-eu-ciclista-mtb.png',    category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de ciclista MTB com capacete escuro e bicicleta em diorama' },
+  { id: 5,  src: '/gallery/mini-eu-ciclista-roxo.png',   category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de ciclista com capacete roxo e bicicleta em diorama' },
+  { id: 6,  src: '/gallery/mini-eu-guarda-redes.png',    category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu personalizado de guarda-redes "Martim" com baliza em diorama' },
+  { id: 7,  src: '/gallery/mini-eu-trike.png',           category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de trike de desporto adaptado, ciclismo paralímpico pintado à mão' },
+  // Coleccionáveis
+  { id: 8,  src: '/gallery/col-rei-trono.png',           category: 'collectibles', aspect: '1/1', alt: 'Estatueta coleccionável de rei em trono dourado com detalhes elaborados' },
+  { id: 9,  src: '/gallery/col-michael-jackson.png',     category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável de Michael Jackson — Smooth Criminal, pintada à mão' },
+  { id: 10, src: '/gallery/col-broly.png',               category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável Broly Dragon Ball com base de lava iluminada' },
+  { id: 11, src: '/gallery/col-nightwing.png',           category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável Nightwing DC Comics em pose de acção' },
+  { id: 12, src: '/gallery/col-moana.png',               category: 'collectibles', aspect: '3/4', alt: 'Estatueta chibi de Moana com remo, pintada à mão com detalhes finos' },
+  { id: 13, src: '/gallery/col-stitch-lourenco.png',     category: 'collectibles', aspect: '3/4', alt: 'Stitch personalizado com nome Lourenço, estatueta pintada à mão' },
+  { id: 14, src: '/gallery/col-angel-alexa.png',         category: 'collectibles', aspect: '3/4', alt: 'Angel personalizada com nome Alexa, estatueta pintada à mão em rosa' },
+  { id: 15, src: '/gallery/col-conjunto-1.png',          category: 'collectibles', aspect: '4/3', alt: 'Conjunto de figuras coleccionáveis estilo chibi em exposição' },
+  { id: 16, src: '/gallery/col-conjunto-2.png',          category: 'collectibles', aspect: '4/3', alt: 'Conjunto de figuras coleccionáveis Inside Out pintadas à mão' },
 ] as const;
 ---
 
 <div class="gallery-section">
 
-  <!-- Filter buttons -->
-  <div class="filter-bar" role="group" aria-label="Filtrar por categoria">
+  <div class="filter-bar" role="group" aria-label={tr.portfolio.heading}>
     <button class="filter-btn active" data-filter="all">{tr.portfolio.filter.all}</button>
-    <button class="filter-btn" data-filter="printing">{tr.portfolio.filter.printing}</button>
-    <button class="filter-btn" data-filter="laser">{tr.portfolio.filter.laser}</button>
-    <button class="filter-btn" data-filter="painting">{tr.portfolio.filter.painting}</button>
+    <button class="filter-btn" data-filter="miniEu">{tr.portfolio.filter.miniEu}</button>
+    <button class="filter-btn" data-filter="collectibles">{tr.portfolio.filter.collectibles}</button>
   </div>
 
-  <!-- Grid -->
-  <div class="gallery-grid" id="gallery-grid">
+  <div class="gallery-grid" id="gallery-grid" role="list">
     {items.map(item => (
-      <article class="gallery-item" data-category={item.category}>
-        <div class={`ph-img ph-img--${item.color} gi-img`} style={`aspect-ratio: ${item.aspect}`}>
-          <span class="ph-img__label">{item.title}</span>
-        </div>
+      <article class="gallery-item" data-category={item.category} role="listitem">
+        <img
+          src={item.src}
+          alt={item.alt}
+          class="gi-img"
+          loading="lazy"
+          style={`aspect-ratio: ${item.aspect}`}
+        />
         <div class="gi-info">
-          <h3 class="gi-title">{item.title}</h3>
-          <p class="gi-desc">{item.desc}</p>
+          <p class="gi-desc">{item.alt}</p>
         </div>
       </article>
     ))}
@@ -58,9 +63,12 @@ const items = [
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter ?? 'all';
-
-      btns.forEach(b => b.classList.remove('active'));
+      btns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       items.forEach(item => {
         const show = filter === 'all' || item.dataset.category === filter;
@@ -68,10 +76,11 @@ const items = [
       });
     });
   });
+
+  document.querySelector('.filter-btn.active')?.setAttribute('aria-pressed', 'true');
 </script>
 
 <style>
-  /* Filter bar */
   .filter-bar {
     display: flex;
     gap: 0.5rem;
@@ -92,8 +101,11 @@ const items = [
   }
   .filter-btn:hover  { border-color: var(--navy); color: var(--navy); }
   .filter-btn.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+  .filter-btn:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+  }
 
-  /* Grid */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -102,31 +114,25 @@ const items = [
 
   .gallery-item { display: flex; flex-direction: column; }
 
-  .gi-img { width: 100%; transition: transform 0.35s ease; }
-  .gallery-item:hover .gi-img { transform: scale(1.02); }
-
-  .gi-info {
-    padding: 0.875rem 0 0;
+  .gi-img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .gi-title {
-    font-family: var(--font-serif);
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--navy);
-    margin-bottom: 0.25rem;
+  @media (hover: hover) {
+    .gi-img { transition: transform 0.35s ease; }
+    .gallery-item:hover .gi-img { transform: scale(1.02); }
   }
 
+  .gi-info { padding: 0.75rem 0 0; }
   .gi-desc {
     font-size: 0.75rem;
     color: var(--light-gray);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
   }
 
-  @media (max-width: 900px) {
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 480px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
 </style>

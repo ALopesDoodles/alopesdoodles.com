@@ -1,7 +1,19 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://PLACEHOLDER.github.io', // TODO: substituir pelo domínio real
+  site: 'https://alopesdoodles.com',
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'pt',
+        locales: {
+          pt: 'pt-PT',
+          es: 'es-ES',
+          en: 'en-US',
+        },
+      },
+    }),
+  ],
 });

@@ -13,7 +13,7 @@ const { tr, lang } = Astro.props;
   <div class="container footer-inner">
 
     <div class="footer-brand">
-      <p class="footer-logo">A.Lopes <em>Doodles</em></p>
+      <img src="/logo.png" alt="A.Lopes Doodles" class="footer-logo-img" />
       <p class="footer-tagline">{tr.footer.tagline}</p>
       <p class="footer-location">
         <span class="label">{tr.footer.madeIn}</span>
@@ -75,16 +75,10 @@ const { tr, lang } = Astro.props;
   }
 
   /* Brand */
-  .footer-logo {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: var(--cream);
+  .footer-logo-img {
+    width: 90px;
+    object-fit: contain;
     margin-bottom: 0.75rem;
-  }
-  .footer-logo em {
-    font-style: italic;
-    color: var(--terracotta);
   }
   .footer-tagline {
     font-size: 0.85rem;

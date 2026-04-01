@@ -17,9 +17,9 @@ const { lang } = Astro.params;
 const tr = t(lang);
 ---
 
-<Layout lang={lang} title={tr.portfolio.heading} description={tr.portfolio.subheading}>
+<Layout lang={lang} title={tr.seo.portfolio.title} description={tr.seo.portfolio.description} canonicalPath={`/${lang}/portfolio`}>
   <Header lang={lang} currentPage="portfolio" tr={tr} />
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="section page-hero">
       <div class="container">
         <p class="label">{tr.portfolio.heading}</p>

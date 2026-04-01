@@ -18,9 +18,9 @@ const tr = t(lang);
 const c = tr.contact;
 ---
 
-<Layout lang={lang} title={c.heading} description={c.subheading}>
+<Layout lang={lang} title={tr.seo.contact.title} description={tr.seo.contact.description} canonicalPath={`/${lang}/contact`}>
   <Header lang={lang} currentPage="contact" tr={tr} />
-  <main>
+  <main id="main-content" tabindex="-1">
 
     <section class="section page-hero">
       <div class="container">

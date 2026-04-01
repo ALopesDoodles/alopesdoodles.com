@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Hero from '../../components/Hero.astro';
 import Services from '../../components/Services.astro';
 import GalleryPreview from '../../components/GalleryPreview.astro';
+import FAQ from '../../components/FAQ.astro';
 import { t } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -19,14 +20,16 @@ const { lang } = Astro.params;
 const tr = t(lang);
 ---
 
-<Layout lang={lang} title={tr.hero.title} description={tr.hero.subtitle}>
+<Layout lang={lang} title={tr.seo.home.title} description={tr.seo.home.description} canonicalPath={`/${lang}`}>
   <Header lang={lang} currentPage="home" tr={tr} />
-  <main>
+  <main id="main-content" tabindex="-1">
     <Hero tr={tr} lang={lang} />
     <hr class="divider" />
     <Services tr={tr} lang={lang} />
     <hr class="divider" />
     <GalleryPreview tr={tr} lang={lang} />
+    <hr class="divider" />
+    <FAQ tr={tr} />
   </main>
   <Footer tr={tr} lang={lang} />
 </Layout>

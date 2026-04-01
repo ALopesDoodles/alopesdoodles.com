@@ -2,31 +2,87 @@
 import '../styles/global.css';
 
 interface Props {
-  title?: string;
-  description?: string;
-  lang?: string;
+  title:       string;
+  description: string;
+  lang?:       string;
+  canonicalPath?: string; // ex: '/pt/portfolio'
+  ogImage?:    string;    // TODO: substituir pela imagem real (ex: '/og-image.jpg')
 }
 
 const {
-  title = 'A.Lopes Doodles',
-  description = 'Impressão 3D, Gravação Laser e Pintura. Trabalhos elaborados por quem ama o que faz. Feito em Portugal.',
-  lang = 'pt',
+  title,
+  description,
+  lang         = 'pt',
+  canonicalPath,
+  ogImage      = '/favicon.svg', // TODO: substituir por '/og-image.jpg' (1200×630px)
 } = Astro.props;
 
-const pageTitle = title === 'A.Lopes Doodles' ? title : `${title} | A.Lopes Doodles`;
+const siteUrl   = 'https://alopesdoodles.com';
+const canonical = canonicalPath ? `${siteUrl}${canonicalPath}` : `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+const localeMap: Record<string, string> = { pt: 'pt_PT', es: 'es_ES', en: 'en_US' };
+const ogLocale = localeMap[lang] ?? 'pt_PT';
+
+// JSON-LD — LocalBusiness schema
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'A.Lopes Doodles',
+  description: 'Impressão 3D, Gravação Laser e Pintura. Trabalhos elaborados por quem ama o que faz.',
+  url: siteUrl,
+  image: ogImageUrl,
+  logo: ogImageUrl,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'PT',
+  },
+  sameAs: [
+    'https://www.instagram.com/PLACEHOLDER', // TODO: substituir
+    'https://www.facebook.com/PLACEHOLDER',  // TODO: substituir
+  ],
+  // TODO: adicionar telephone, email, openingHours quando tiveres os dados reais
+};
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <title>{pageTitle}</title>
+
+    <!-- SEO primário -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="A.Lopes Doodles" />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:image"       content={ogImageUrl} />
+    <meta property="og:locale"      content={ogLocale} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageUrl} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo principal</a>
     <slot />
   </body>
 </html>

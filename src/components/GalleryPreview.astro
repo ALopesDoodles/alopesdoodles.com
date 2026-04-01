@@ -8,52 +8,61 @@ interface Props {
 
 const { tr, lang } = Astro.props;
 
-// 6 placeholder items para a home — substituir com imagens reais
+// 6 destaques para a home
 const items = [
-  { id: 1, category: 'printing', color: 'navy',  aspect: '4/3',  title: 'Projeto 3D #1' },
-  { id: 2, category: 'laser',    color: 'terra', aspect: '1/1',  title: 'Gravação #1'   },
-  { id: 3, category: 'painting', color: 'cream', aspect: '4/3',  title: 'Pintura #1'    },
-  { id: 4, category: 'laser',    color: 'slate', aspect: '1/1',  title: 'Gravação #2'   },
-  { id: 5, category: 'printing', color: 'moss',  aspect: '4/3',  title: 'Projeto 3D #2' },
-  { id: 6, category: 'painting', color: 'warm',  aspect: '1/1',  title: 'Pintura #2'    },
+  { id: 1, src: '/gallery/mini-eu-carocha.png',      category: 'miniEu',       aspect: '1/1', alt: 'Diorama em miniatura com Carocha VW, árvore e banco de jardim' },
+  { id: 2, src: '/gallery/mini-eu-casamento.png',     category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de casal no bolo de casamento' },
+  { id: 3, src: '/gallery/mini-eu-ciclista-cao.png',  category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de ciclista MTB com bicicleta e cão em diorama' },
+  { id: 4, src: '/gallery/col-rei-trono.png',         category: 'collectibles', aspect: '1/1', alt: 'Estatueta coleccionável de rei em trono dourado' },
+  { id: 5, src: '/gallery/col-michael-jackson.png',   category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável de Michael Jackson pintada à mão' },
+  { id: 6, src: '/gallery/mini-eu-guarda-redes.png',  category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu personalizado de guarda-redes Martim com baliza' },
 ] as const;
+
+const categoryLabel = (cat: string) => {
+  const map: Record<string, string> = {
+    miniEu:       tr.portfolio.filter.miniEu,
+    laser:        tr.portfolio.filter.laser,
+    tabletop:     tr.portfolio.filter.tabletop,
+    collectibles: tr.portfolio.filter.collectibles,
+  };
+  return map[cat] ?? cat;
+};
 ---
 
-<section class="section gallery-preview">
+<section class="section gallery-preview" aria-labelledby="gallery-preview-heading">
   <div class="container">
 
     <header class="gp-header">
       <div>
         <p class="label">{tr.portfolio.heading}</p>
-        <h2 class="section-title">{tr.portfolio.subheading}</h2>
+        <h2 class="section-title" id="gallery-preview-heading">{tr.portfolio.subheading}</h2>
       </div>
       <a href={`/${lang}/portfolio`} class="btn btn-outline gp-view-all">
         {tr.portfolio.viewAll}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path d="M2 7h10M8 3l4 4-4 4"/>
         </svg>
       </a>
     </header>
 
-    <div class="gp-grid">
+    <ul class="gp-grid" role="list">
       {items.map(item => (
-        <a href={`/${lang}/portfolio`} class="gp-item" aria-label={item.title}>
-          <div
-            class={`ph-img ph-img--${item.color} gp-img`}
-            style={`aspect-ratio: ${item.aspect}`}
-          >
-            <span class="ph-img__label">{item.title}</span>
-          </div>
-          <div class="gp-overlay">
-            <span class="gp-category">
-              {item.category === 'printing' ? tr.portfolio.filter.printing
-               : item.category === 'laser' ? tr.portfolio.filter.laser
-               : tr.portfolio.filter.painting}
-            </span>
-          </div>
-        </a>
+        <li role="listitem">
+          <a href={`/${lang}/portfolio`} class="gp-item" aria-label={item.alt}>
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="gp-img"
+              loading="lazy"
+              style={`aspect-ratio: ${item.aspect}`}
+            />
+            <div class="gp-overlay" aria-hidden="true">
+              <span class="gp-category">{categoryLabel(item.category)}</span>
+            </div>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
 
   </div>
 </section>
@@ -67,45 +76,55 @@ const items = [
     margin-bottom: 3rem;
   }
   .gp-header .label { margin-bottom: 0.5rem; }
-  .gp-view-all { align-self: flex-end; }
+  .gp-view-all { align-self: flex-end; flex-shrink: 0; }
 
   .gp-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .gp-item {
     display: block;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
+  }
+  .gp-item:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
   }
 
   .gp-img { width: 100%; transition: transform 0.4s ease; }
-  .gp-item:hover .gp-img { transform: scale(1.03); }
 
   .gp-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(28, 36, 56, 0);
+    background: rgba(28, 36, 56, 0.35);
     display: flex;
     align-items: flex-end;
     padding: 1rem;
     transition: background 0.3s;
   }
-  .gp-item:hover .gp-overlay { background: rgba(28, 36, 56, 0.4); }
 
   .gp-category {
     font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: white;
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s;
   }
-  .gp-item:hover .gp-category { opacity: 1; transform: translateY(0); }
+
+  /* Dispositivos com hover real (rato) — efeito dinâmico */
+  @media (hover: hover) {
+    .gp-overlay { background: rgba(28, 36, 56, 0); }
+    .gp-category { opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s; }
+    .gp-item:hover .gp-img { transform: scale(1.03); }
+    .gp-item:hover .gp-overlay { background: rgba(28, 36, 56, 0.4); }
+    .gp-item:hover .gp-category { opacity: 1; transform: translateY(0); }
+  }
 
   @media (max-width: 768px) {
     .gp-header { flex-direction: column; align-items: flex-start; }

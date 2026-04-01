@@ -138,6 +138,36 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 1;
 }
 
+/* ─── Accessibility ──────────────────────────────────────────────── */
+
+/* Skip to main content — visível apenas ao foco por teclado */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--terracotta);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Focus visible — anel consistente nas cores do site */
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+/* Remover outline para utilizadores de rato */
+:focus:not(:focus-visible) { outline: none; }
+
+/* main tabindex=-1 não deve mostrar outline */
+main:focus { outline: none; }
+
 /* ─── Utilities ──────────────────────────────────────────────────── */
 .sr-only {
   position: absolute;

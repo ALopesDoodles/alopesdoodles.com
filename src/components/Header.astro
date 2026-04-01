@@ -84,9 +84,25 @@ const nav = [
 <script>
   const toggle = document.getElementById('menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
+
+  function closeMenu() {
+    mobileNav?.classList.remove('is-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }
+
   toggle?.addEventListener('click', () => {
     const open = mobileNav?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // Fechar ao clicar num link do menu mobile
+  mobileNav?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Fechar ao carregar Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
   });
 </script>
 
