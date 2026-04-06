@@ -51,9 +51,6 @@ const items = [
             loading="lazy"
           />
         </button>
-        <div class="gi-info">
-          <p class="gi-desc">{item.alt}</p>
-        </div>
       </article>
     ))}
   </div>
@@ -218,13 +215,6 @@ const items = [
   }
   .lightbox-close:hover { opacity: 1; }
 
-  .gi-info { padding: 0.75rem 0 0; }
-  .gi-desc {
-    font-size: 0.75rem;
-    color: var(--light-gray);
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-  }
 
   @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
