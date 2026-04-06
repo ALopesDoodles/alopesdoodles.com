@@ -9,10 +9,12 @@ export interface Translations {
     miniEu:      { label: string; description: string };
     laser:       { label: string; description: string };
     collectibles:{ label: string; description: string };
+    cosplay:     { label: string; description: string };
+    custom:      { label: string; description: string };
   };
   portfolio: {
     heading: string; subheading: string; viewAll: string;
-    filter: { all: string; miniEu: string; laser: string; tabletop: string; collectibles: string };
+    filter: { all: string; miniEu: string; laser: string; tabletop: string; collectibles: string; cosplay: string; custom: string };
   };
   about: { heading: string; label: string; body1: string; body2: string; location: string };
   contact: {
@@ -21,6 +23,7 @@ export interface Translations {
     namePlaceholder: string; emailPlaceholder: string;
     subjectPlaceholder: string; messagePlaceholder: string;
     whatsapp: string; emailLabel: string; followUs: string;
+    waLabel: string; waNote: string; orContact: string;
   };
   footer: { tagline: string; rights: string; madeIn: string };
   faq: { heading: string; items: { q: string; a: string }[] };
@@ -49,10 +52,12 @@ const pt: Translations = {
     miniEu:       { label: 'Mini-eu',              description: 'Bonecos personalizados estilo Funko que te representam a ti — com a tua profissão, desporto, hobbies ou memórias. Inclusivos por natureza.' },
     laser:        { label: 'Gravação Laser',        description: 'Gravação em madeira, acrílico, couro e muito mais. Porta-chaves, ímanes, quadros e presentes únicos com o teu nome ou mensagem.' },
     collectibles: { label: 'Tabletop & Coleccionáveis', description: 'Miniaturas para jogos de mesa e estatuetas de colecção pintadas à mão com detalhe artesanal.' },
+    cosplay:      { label: 'Cosplay',              description: 'Adereços e peças impressas em 3D para cosplay — capacetes, armaduras, acessórios e réplicas de personagens feitas com precisão.' },
+    custom:       { label: 'Customizáveis',        description: 'Suportes, troféus, molduras e acessórios funcionais feitos à medida. Se tens uma ideia, há uma forma de a tornar real.' },
   },
   portfolio: {
     heading: 'Portfólio', subheading: 'O teu boneco. A tua história.', viewAll: 'Ver todos os trabalhos',
-    filter: { all: 'Todos', miniEu: 'Mini-eu', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Coleccionáveis' },
+    filter: { all: 'Todos', miniEu: 'Mini-eu', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Coleccionáveis', cosplay: 'Cosplay', custom: 'Customizáveis' },
   },
   about: {
     heading: 'Sobre', label: 'A história',
@@ -66,6 +71,9 @@ const pt: Translations = {
     namePlaceholder: 'O teu nome', emailPlaceholder: 'o.teu@email.com',
     subjectPlaceholder: 'Mini-eu, gravação, coleccionável…', messagePlaceholder: 'Descreve o teu projeto…',
     whatsapp: 'WhatsApp', emailLabel: 'Email', followUs: 'Redes sociais',
+    waLabel: 'Fala comigo pelo WhatsApp',
+    waNote: 'Respondo normalmente em menos de 24 horas.',
+    orContact: 'Ou contacta-me por',
   },
   footer: {
     tagline: 'O teu boneco. A tua história.',
@@ -110,10 +118,12 @@ const es: Translations = {
     miniEu:       { label: 'Mini-yo',              description: 'Muñecos personalizados estilo Funko que te representan a ti — con tu profesión, deporte, hobbies o recuerdos. Inclusivos por naturaleza.' },
     laser:        { label: 'Grabado Láser',        description: 'Grabado en madera, acrílico, cuero y mucho más. Llaveros, imanes, cuadros y regalos únicos con tu nombre o mensaje.' },
     collectibles: { label: 'Tabletop & Coleccionables', description: 'Miniaturas para juegos de mesa y figuras de colección pintadas a mano con detalle artesanal.' },
+    cosplay:      { label: 'Cosplay',              description: 'Accesorios y piezas impresas en 3D para cosplay — cascos, armaduras, accesorios y réplicas de personajes hechas con precisión.' },
+    custom:       { label: 'Personalizables',      description: 'Soportes, trofeos, marcos y accesorios funcionales hechos a medida. Si tienes una idea, hay una forma de hacerla realidad.' },
   },
   portfolio: {
     heading: 'Portafolio', subheading: 'Tu muñeco. Tu historia.', viewAll: 'Ver todos los trabajos',
-    filter: { all: 'Todos', miniEu: 'Mini-yo', laser: 'Láser', tabletop: 'Tabletop', collectibles: 'Coleccionables' },
+    filter: { all: 'Todos', miniEu: 'Mini-yo', laser: 'Láser', tabletop: 'Tabletop', collectibles: 'Coleccionables', cosplay: 'Cosplay', custom: 'Personalizables' },
   },
   about: {
     heading: 'Sobre mí', label: 'La historia',
@@ -127,6 +137,9 @@ const es: Translations = {
     namePlaceholder: 'Tu nombre', emailPlaceholder: 'tu@email.com',
     subjectPlaceholder: 'Mini-yo, grabado, coleccionable…', messagePlaceholder: 'Describe tu proyecto…',
     whatsapp: 'WhatsApp', emailLabel: 'Email', followUs: 'Redes sociales',
+    waLabel: 'Háblame por WhatsApp',
+    waNote: 'Respondo normalmente en menos de 24 horas.',
+    orContact: 'O contáctame por',
   },
   footer: {
     tagline: 'Tu muñeco. Tu historia.',
@@ -171,10 +184,12 @@ const en: Translations = {
     miniEu:       { label: 'Mini-me',              description: 'Custom Funko-style figurines that represent you — your profession, sport, hobbies or memories. Inclusive by design.' },
     laser:        { label: 'Laser Engraving',      description: 'Engraving on wood, acrylic, leather and more. Keychains, magnets, artwork and unique gifts with your name or message.' },
     collectibles: { label: 'Tabletop & Collectibles', description: 'Hand-painted miniatures for tabletop games and collectible figurines with artisan detail.' },
+    cosplay:      { label: 'Cosplay',              description: '3D printed props and parts for cosplay — helmets, armour, accessories and character replicas made with precision.' },
+    custom:       { label: 'Customisables',        description: 'Stands, trophies, frames and functional accessories made to order. If you have an idea, there is a way to make it real.' },
   },
   portfolio: {
     heading: 'Portfolio', subheading: 'Your figurine. Your story.', viewAll: 'View all work',
-    filter: { all: 'All', miniEu: 'Mini-me', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Collectibles' },
+    filter: { all: 'All', miniEu: 'Mini-me', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Collectibles', cosplay: 'Cosplay', custom: 'Customisables' },
   },
   about: {
     heading: 'About', label: 'The story',
@@ -188,6 +203,9 @@ const en: Translations = {
     namePlaceholder: 'Your name', emailPlaceholder: 'your@email.com',
     subjectPlaceholder: 'Mini-me, engraving, collectible…', messagePlaceholder: 'Describe your project…',
     whatsapp: 'WhatsApp', emailLabel: 'Email', followUs: 'Follow us',
+    waLabel: 'Talk to me on WhatsApp',
+    waNote: 'I usually reply within 24 hours.',
+    orContact: 'Or reach me on',
   },
   footer: {
     tagline: 'Your figurine. Your story.',
