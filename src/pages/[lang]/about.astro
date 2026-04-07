@@ -32,17 +32,9 @@ const a = tr.about;
     <section class="section about-section">
       <div class="container about-grid">
 
-        <!-- Photo placeholder -->
+        <!-- Photo -->
         <div class="about-photo-wrap">
-          <!--
-            TODO: substituir pela tua foto real.
-            Coloca a imagem em public/about-photo.jpg e usa:
-            <img src="/about-photo.jpg" alt="António Lopes" class="about-photo" />
-          -->
-          <div class="ph-img ph-img--navy about-photo-placeholder" aria-label="Foto placeholder">
-            <span class="ph-img__label">FOTO</span>
-            <div class="about-photo-initials">AL</div>
-          </div>
+          <img src="/gallery/Alopes%20Foto.png" alt="António Lopes" class="about-photo" />
           <div class="about-origin">
             <span class="label">{a.location}</span>
           </div>
@@ -53,6 +45,7 @@ const a = tr.about;
           <h2 class="about-name">António Lopes</h2>
           <p class="about-body">{a.body1}</p>
           <p class="about-body">{a.body2}</p>
+          <p class="about-body">{a.body3}</p>
 
           <a href={`/${lang}/contact`} class="btn btn-primary">{tr.nav.contact}</a>
         </div>
@@ -78,21 +71,11 @@ const a = tr.about;
   /* Photo */
   .about-photo-wrap { position: relative; }
 
-  .about-photo-placeholder {
+  .about-photo {
     width: 100%;
     aspect-ratio: 3/4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .about-photo-initials {
-    font-family: var(--font-serif);
-    font-size: 5rem;
-    font-weight: 400;
-    color: rgba(232, 212, 176, 0.3);
-    position: relative;
-    z-index: 1;
+    object-fit: cover;
+    display: block;
   }
 
   .about-origin {
@@ -120,6 +103,6 @@ const a = tr.about;
       grid-template-columns: 1fr;
       gap: 3rem;
     }
-    .about-photo-placeholder { aspect-ratio: 4/3; }
+    .about-photo { aspect-ratio: 4/3; }
   }
 </style>

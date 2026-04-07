@@ -16,7 +16,7 @@ export interface Translations {
     heading: string; subheading: string; viewAll: string;
     filter: { all: string; miniEu: string; laser: string; tabletop: string; collectibles: string; cosplay: string; custom: string };
   };
-  about: { heading: string; label: string; body1: string; body2: string; location: string };
+  about: { heading: string; label: string; body1: string; body2: string; body3: string; location: string };
   contact: {
     heading: string; subheading: string;
     name: string; email: string; subject: string; message: string; send: string;
@@ -61,8 +61,9 @@ const pt: Translations = {
   },
   about: {
     heading: 'Sobre', label: 'A história',
-    body1: 'Placeholder — conta aqui a tua história, de onde vens e o que te motivou a criar o A.Lopes Doodles.',
-    body2: 'Placeholder — descreve a tua paixão pelos detalhes, o teu processo criativo e o que te distingue dos demais.',
+    body1: 'Cresci com uma curiosidade natural pela tecnologia e uma paixão pela cultura pop — miniaturas, anime, jogos, figuras. Pintava miniaturas de jogos de tabuleiro por prazer, como forma de desligar e expressar algo que as palavras não chegavam. Em 2024 descobri a impressão 3D e percebi que podia levar esse gosto a outro nível — não como profissional, mas como alguém que nunca para de aprender.',
+    body2: 'O que se seguiu foi uma jornada que não antecipei: modelação 3D, aerógrafo, laser, cada técnica a abrir porta para a seguinte. A cada peça aprendo qualquer coisa nova. A cada peça deixo um pouco de mim.',
+    body3: 'O projeto que mudou tudo foram os Mini Eu — dioramas personalizados que representam pessoas reais, com as suas histórias, paixões e personalidade. Foi aqui que percebi que não estava só a criar objetos. Estava a guardar momentos. Hoje cada comissão é um projeto com alma — seja um troféu, um diorama ou uma gravação a laser. O detalhe não é um extra. É a razão de existir.',
     location: 'Portugal',
   },
   contact: {
@@ -127,8 +128,9 @@ const es: Translations = {
   },
   about: {
     heading: 'Sobre mí', label: 'La historia',
-    body1: 'Placeholder — cuenta aquí tu historia, de dónde vienes y qué te motivó a crear A.Lopes Doodles.',
-    body2: 'Placeholder — describe tu pasión por los detalles, tu proceso creativo y lo que te distingue de los demás.',
+    body1: 'Crecí con una curiosidad natural por la tecnología y una pasión por la cultura pop — miniaturas, anime, juegos, figuras. Pintaba miniaturas de juegos de mesa por placer, como forma de desconectar y expresar algo que las palabras no alcanzaban. En 2024 descubrí la impresión 3D y me di cuenta de que podía llevar esa afición a otro nivel — no como profesional, sino como alguien que nunca deja de aprender.',
+    body2: 'Lo que siguió fue un viaje que no anticipé: modelado 3D, aerógrafo, láser, cada técnica abriendo la puerta a la siguiente. En cada pieza aprendo algo nuevo. En cada pieza dejo un poco de mí.',
+    body3: 'El proyecto que lo cambió todo fueron los Mini Eu — dioramas personalizados que representan personas reales, con sus historias, pasiones y personalidad. Fue aquí donde me di cuenta de que no solo estaba creando objetos. Estaba guardando momentos. Hoy cada encargo es un proyecto con alma — ya sea un trofeo, un diorama o un grabado láser. El detalle no es un extra. Es la razón de existir.',
     location: 'Portugal',
   },
   contact: {
@@ -193,8 +195,9 @@ const en: Translations = {
   },
   about: {
     heading: 'About', label: 'The story',
-    body1: 'Placeholder — tell your story here, where you come from and what motivated you to create A.Lopes Doodles.',
-    body2: 'Placeholder — describe your passion for detail, your creative process and what sets you apart.',
+    body1: 'I grew up with a natural curiosity for technology and a passion for pop culture — miniatures, anime, games, figures. I painted tabletop miniatures for fun, as a way to switch off and express something that words couldn\'t quite reach. In 2024 I discovered 3D printing and realised I could take that passion to another level — not as a professional, but as someone who never stops learning.',
+    body2: 'What followed was a journey I hadn\'t anticipated: 3D modelling, airbrushing, laser engraving — each technique opening the door to the next. With every piece I learn something new. With every piece I leave a little of myself.',
+    body3: 'The project that changed everything was the Mini Eu — personalised dioramas that represent real people, with their stories, passions and personality. It was here that I realised I wasn\'t just creating objects. I was preserving moments. Today every commission is a project with soul — whether it\'s a trophy, a diorama or a laser engraving. The detail isn\'t an extra. It\'s the reason for being.',
     location: 'Portugal',
   },
   contact: {
