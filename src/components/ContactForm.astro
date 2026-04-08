@@ -1,0 +1,178 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  tr: Translations;
+}
+
+const { tr } = Astro.props;
+const c = tr.contact;
+---
+
+<div class="contact-wrap">
+
+  <!-- WhatsApp — destaque principal -->
+  <div class="wa-block">
+    <p class="label">{c.whatsapp}</p>
+    <p class="wa-label">{c.waLabel}</p>
+    <a
+      href="https://wa.me/351912553507"
+      target="_blank"
+      rel="noopener"
+      class="btn btn-primary wa-btn"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+      WhatsApp
+    </a>
+    <p class="wa-note">{c.waNote}</p>
+  </div>
+
+  <div class="divider-or">
+    <span>{c.orContact}</span>
+  </div>
+
+  <!-- Email + Redes sociais -->
+  <div class="other-contacts">
+
+    <div class="contact-row">
+      <span class="contact-row-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m2 7 10 7 10-7"/>
+        </svg>
+      </span>
+      <span class="contact-row-label">{c.emailLabel}</span>
+      <a href="mailto:geral@alopesdoodles.com" class="contact-row-value">geral@alopesdoodles.com</a>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-row-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span class="contact-row-label">Instagram</span>
+      <a href="https://www.instagram.com/a.lopesdoodlesworkshop" target="_blank" rel="noopener" class="contact-row-value">@a.lopesdoodlesworkshop</a>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-row-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </span>
+      <span class="contact-row-label">Facebook</span>
+      <a href="https://www.facebook.com/share/1Hsz5mHw4U/" target="_blank" rel="noopener" class="contact-row-value">A.Lopes Doodles Workshop</a>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .contact-wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  /* WhatsApp block */
+  .wa-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .wa-block .label { margin-bottom: 0; }
+
+  .wa-label {
+    font-size: 1.1rem;
+    color: var(--navy);
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    align-self: flex-start;
+  }
+
+  .wa-note {
+    font-size: 0.82rem;
+    color: var(--light-gray);
+    margin-top: 0.25rem;
+  }
+
+  /* Divider */
+  .divider-or {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--light-gray);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .divider-or::before,
+  .divider-or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Other contacts */
+  .other-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--dark);
+    text-decoration: none;
+    pointer-events: none;
+  }
+  .contact-row:first-child { border-top: 1px solid var(--border); }
+
+  .contact-row-icon {
+    display: flex;
+    align-items: center;
+    color: var(--gray);
+    flex-shrink: 0;
+  }
+
+  .contact-row-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .contact-row-value {
+    font-size: 0.9rem;
+    color: var(--navy);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    pointer-events: all;
+    transition: color 0.2s;
+  }
+  .contact-row-value:hover { color: var(--terracotta); }
+</style>

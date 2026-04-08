@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alopesdoodles.com/sitemap-index.xml
