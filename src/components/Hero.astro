@@ -16,8 +16,7 @@ const { tr, lang } = Astro.props;
       <p class="label hero-badge">{tr.hero.badge}</p>
 
       <h1 class="hero-title" id="hero-title">
-        <span class="hero-title-main">A.Lopes</span>
-        <span class="hero-title-accent">Doodles</span>
+        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" />
       </h1>
 
       <p class="hero-tagline">{tr.hero.tagline}</p>
@@ -30,7 +29,7 @@ const { tr, lang } = Astro.props;
     </div>
 
     <div class="hero-deco" aria-hidden="true">
-      <img src="/logo.png" alt="" aria-hidden="true" class="hero-logo-img" />
+      <img src="/gallery/Alopes%20Cartoon.jpg" alt="" aria-hidden="true" class="hero-cartoon-img" />
     </div>
 
   </div>
@@ -40,10 +39,8 @@ const { tr, lang } = Astro.props;
 
 <style>
   .hero {
-    min-height: calc(90vh - var(--header-h));
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
 
   .hero-inner {
@@ -58,15 +55,14 @@ const { tr, lang } = Astro.props;
   .hero-badge { margin-bottom: 2rem; }
 
   .hero-title {
-    display: flex;
-    flex-direction: column;
-    font-family: var(--font-serif);
-    font-weight: 400;
-    line-height: 1.02;
     margin-bottom: 1.75rem;
   }
-  .hero-title-main  { font-size: clamp(3.5rem, 7vw, 6.5rem); color: var(--navy); }
-  .hero-title-accent{ font-size: clamp(3rem, 6vw, 5.5rem); font-style: italic; color: var(--terracotta); }
+
+  .hero-logo-img {
+    width: clamp(160px, 22vw, 280px);
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
 
   .hero-tagline {
     font-family: var(--font-serif);
@@ -89,18 +85,21 @@ const { tr, lang } = Astro.props;
 
   .hero-deco { display: flex; justify-content: center; align-items: center; }
 
-  .hero-logo-img {
-    width: clamp(260px, 30vw, 400px);
-    aspect-ratio: 1;
-    object-fit: contain;
+  .hero-cartoon-img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 1rem;
+    object-fit: cover;
   }
 
   @media (max-width: 900px) {
+    .hero { min-height: auto; padding: 3rem 0; }
     .hero-inner { grid-template-columns: 1fr; text-align: center; }
     .hero-badge, .hero-tagline { display: block; }
     .hero-subtitle { margin-left: auto; margin-right: auto; }
     .hero-cta { justify-content: center; }
     .hero-deco { order: -1; }
-    .hero-logo-img { width: clamp(180px, 45vw, 260px); }
+    .hero-logo-img { width: clamp(120px, 35vw, 200px); }
+    .hero-cartoon-img { max-width: 320px; }
   }
 </style>

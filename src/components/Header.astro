@@ -111,8 +111,8 @@ const nav = [
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--off-white);
-    border-bottom: 1px solid var(--border);
+    background: var(--navy);
+    border-bottom: 1px solid rgba(232, 212, 176, 0.1);
   }
 
   .header-inner {
@@ -134,7 +134,7 @@ const nav = [
     font-family: var(--font-serif);
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--cream);
     letter-spacing: 0.02em;
   }
   .logo-sub {
@@ -156,7 +156,7 @@ const nav = [
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--gray);
+    color: rgba(232, 212, 176, 0.6);
     transition: color 0.2s;
     position: relative;
     padding-bottom: 2px;
@@ -170,7 +170,7 @@ const nav = [
     transition: width 0.25s ease;
   }
   .nav-link:hover,
-  .nav-link.active { color: var(--navy); }
+  .nav-link.active { color: var(--cream); }
   .nav-link:hover::after,
   .nav-link.active::after { width: 100%; }
 
@@ -192,14 +192,14 @@ const nav = [
     font-size: 0.65rem;
     font-weight: 500;
     letter-spacing: 0.08em;
-    color: var(--light-gray);
+    color: rgba(232, 212, 176, 0.4);
     transition: color 0.2s;
   }
   .lang-link:hover,
   .lang-link.active { color: var(--terracotta); }
   .lang-sep {
     font-size: 0.6rem;
-    color: var(--border);
+    color: rgba(232, 212, 176, 0.2);
   }
 
   /* Hamburger */
@@ -218,7 +218,7 @@ const nav = [
     display: block;
     width: 100%;
     height: 1px;
-    background: var(--navy);
+    background: var(--cream);
     transition: transform 0.25s, opacity 0.25s;
   }
 
@@ -226,8 +226,9 @@ const nav = [
   .nav-mobile {
     display: none;
     flex-direction: column;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(232, 212, 176, 0.1);
     padding: 0.5rem var(--px) 1rem;
+    background: var(--navy);
   }
   .nav-mobile.is-open { display: flex; }
   .nav-mobile-link {
@@ -235,9 +236,9 @@ const nav = [
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--gray);
+    color: rgba(232, 212, 176, 0.6);
     padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(232, 212, 176, 0.1);
     transition: color 0.2s;
   }
   .nav-mobile-link:last-child { border-bottom: none; }
