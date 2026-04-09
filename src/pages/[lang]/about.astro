@@ -25,6 +25,7 @@ const a = tr.about;
       <div class="container">
         <p class="label">{a.label}</p>
         <h1 class="section-title">{a.heading}</h1>
+        <p class="page-subtitle">{a.subtitle}</p>
       </div>
     </section>
     <hr class="divider" />
@@ -60,6 +61,12 @@ const a = tr.about;
 <style>
   .page-hero { padding-bottom: 3rem; }
   .page-hero .label { margin-bottom: 0.75rem; }
+  .page-subtitle {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: var(--gray);
+    font-style: italic;
+  }
 
   .about-grid {
     display: grid;

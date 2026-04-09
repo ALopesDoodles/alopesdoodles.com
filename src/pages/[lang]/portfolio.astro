@@ -24,6 +24,7 @@ const tr = t(lang);
       <div class="container">
         <p class="label">{tr.portfolio.heading}</p>
         <h1 class="section-title">{tr.portfolio.subheading}</h1>
+        <p class="portfolio-subtitle">{tr.marquee.subheading}</p>
       </div>
     </section>
     <hr class="divider" />
@@ -40,4 +41,10 @@ const tr = t(lang);
 <style>
   .page-hero { padding-bottom: 3rem; }
   .page-hero .label { margin-bottom: 0.75rem; }
+  .portfolio-subtitle {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: var(--gray);
+    font-style: italic;
+  }
 </style>

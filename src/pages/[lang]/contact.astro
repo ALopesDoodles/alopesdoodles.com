@@ -26,6 +26,7 @@ const c = tr.contact;
       <div class="container">
         <p class="label">{c.heading}</p>
         <h1 class="section-title">{c.subheading}</h1>
+        <p class="page-subtitle">{c.subtitle}</p>
       </div>
     </section>
     <hr class="divider" />
@@ -43,4 +44,10 @@ const c = tr.contact;
 <style>
   .page-hero { padding-bottom: 3rem; }
   .page-hero .label { margin-bottom: 0.75rem; }
+  .page-subtitle {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    color: var(--gray);
+    font-style: italic;
+  }
 </style>

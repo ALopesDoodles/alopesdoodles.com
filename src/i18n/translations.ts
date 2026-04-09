@@ -7,6 +7,7 @@ export interface Translations {
   services: {
     heading: string;
     subheading: string;
+    cta: string;
     miniEu:      { label: string; description: string };
     laser:       { label: string; description: string };
     tabletop:    { label: string; description: string };
@@ -18,10 +19,12 @@ export interface Translations {
   portfolio: {
     heading: string; subheading: string; viewAll: string;
     filter: { all: string; miniEu: string; laser: string; tabletop: string; collectibles: string; cosplay: string; custom: string };
+    works: string;
+    comingSoon: string;
   };
-  about: { heading: string; label: string; body1: string; body2: string; body3: string; location: string };
+  about: { heading: string; label: string; subtitle: string; body1: string; body2: string; body3: string; location: string };
   contact: {
-    heading: string; subheading: string;
+    heading: string; subheading: string; subtitle: string;
     name: string; email: string; subject: string; message: string; send: string;
     namePlaceholder: string; emailPlaceholder: string;
     subjectPlaceholder: string; messagePlaceholder: string;
@@ -53,6 +56,7 @@ const pt: Translations = {
   services: {
     heading: 'Serviços',
     subheading: 'O que posso criar para ti.',
+    cta: 'Ver trabalhos realizados',
     miniEu:       { label: 'Mini-eu',              description: 'Bonecos personalizados estilo Funko que te representam a ti — com a tua profissão, desporto, hobbies ou memórias. Inclusivos por natureza.' },
     laser:        { label: 'Gravação Laser',        description: 'Gravação em madeira, acrílico, couro e muito mais. Porta-chaves, ímanes, quadros e presentes únicos com o teu nome ou mensagem.' },
     tabletop:     { label: 'Tabletop',             description: 'Miniaturas para jogos de mesa impressas e pintadas à mão com detalhe artesanal — desde heróis a monstros.' },
@@ -64,9 +68,12 @@ const pt: Translations = {
   portfolio: {
     heading: 'Portfólio', subheading: 'O teu boneco. A tua história.', viewAll: 'Ver todos os trabalhos',
     filter: { all: 'Todos', miniEu: 'Mini-eu', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Coleccionáveis', cosplay: 'Cosplay', custom: 'Customizáveis' },
+    works: 'trabalhos',
+    comingSoon: 'Brevemente',
   },
   about: {
     heading: 'Sobre', label: 'A história',
+    subtitle: 'Cada peça começa com uma história. Esta é a minha.',
     body1: 'Cresci com uma curiosidade natural pela tecnologia e uma paixão pela cultura pop — miniaturas, anime, jogos, figuras. Pintava miniaturas de jogos de tabuleiro por prazer, como forma de desligar e expressar algo que as palavras não chegavam. Em 2024 descobri a impressão 3D e percebi que podia levar esse gosto a outro nível — não como profissional, mas como alguém que nunca para de aprender.',
     body2: 'O que se seguiu foi uma jornada que não antecipei: modelação 3D, aerógrafo, laser, cada técnica a abrir porta para a seguinte. A cada peça aprendo qualquer coisa nova. A cada peça deixo um pouco de mim.',
     body3: 'O projeto que mudou tudo foram os Mini Eu — dioramas personalizados que representam pessoas reais, com as suas histórias, paixões e personalidade. Foi aqui que percebi que não estava só a criar objetos. Estava a guardar momentos. Hoje cada comissão é um projeto com alma — seja um troféu, um diorama ou uma gravação a laser. O detalhe não é um extra. É a razão de existir.',
@@ -74,6 +81,7 @@ const pt: Translations = {
   },
   contact: {
     heading: 'Contacto', subheading: 'Vamos criar algo juntos',
+    subtitle: 'Cada história começa com uma conversa. A tua tem lugar aqui.',
     name: 'Nome', email: 'Email', subject: 'Assunto', message: 'Mensagem', send: 'Enviar mensagem',
     namePlaceholder: 'O teu nome', emailPlaceholder: 'o.teu@email.com',
     subjectPlaceholder: 'Mini-eu, gravação, coleccionável…', messagePlaceholder: 'Descreve o teu projeto…',
@@ -123,6 +131,7 @@ const es: Translations = {
   services: {
     heading: 'Servicios',
     subheading: 'Lo que puedo crear para ti.',
+    cta: 'Ver trabajos realizados',
     miniEu:       { label: 'Mini-yo',              description: 'Muñecos personalizados estilo Funko que te representan a ti — con tu profesión, deporte, hobbies o recuerdos. Inclusivos por naturaleza.' },
     laser:        { label: 'Grabado Láser',        description: 'Grabado en madera, acrílico, cuero y mucho más. Llaveros, imanes, cuadros y regalos únicos con tu nombre o mensaje.' },
     tabletop:     { label: 'Tabletop',             description: 'Miniaturas para juegos de mesa impresas y pintadas a mano con detalle artesanal — desde héroes hasta monstruos.' },
@@ -134,9 +143,12 @@ const es: Translations = {
   portfolio: {
     heading: 'Portafolio', subheading: 'Tu muñeco. Tu historia.', viewAll: 'Ver todos los trabajos',
     filter: { all: 'Todos', miniEu: 'Mini-yo', laser: 'Láser', tabletop: 'Tabletop', collectibles: 'Coleccionables', cosplay: 'Cosplay', custom: 'Personalizables' },
+    works: 'trabajos',
+    comingSoon: 'Próximamente',
   },
   about: {
     heading: 'Sobre mí', label: 'La historia',
+    subtitle: 'Cada pieza comienza con una historia. Esta es la mía.',
     body1: 'Crecí con una curiosidad natural por la tecnología y una pasión por la cultura pop — miniaturas, anime, juegos, figuras. Pintaba miniaturas de juegos de mesa por placer, como forma de desconectar y expresar algo que las palabras no alcanzaban. En 2024 descubrí la impresión 3D y me di cuenta de que podía llevar esa afición a otro nivel — no como profesional, sino como alguien que nunca deja de aprender.',
     body2: 'Lo que siguió fue un viaje que no anticipé: modelado 3D, aerógrafo, láser, cada técnica abriendo la puerta a la siguiente. En cada pieza aprendo algo nuevo. En cada pieza dejo un poco de mí.',
     body3: 'El proyecto que lo cambió todo fueron los Mini Eu — dioramas personalizados que representan personas reales, con sus historias, pasiones y personalidad. Fue aquí donde me di cuenta de que no solo estaba creando objetos. Estaba guardando momentos. Hoy cada encargo es un proyecto con alma — ya sea un trofeo, un diorama o un grabado láser. El detalle no es un extra. Es la razón de existir.',
@@ -144,6 +156,7 @@ const es: Translations = {
   },
   contact: {
     heading: 'Contacto', subheading: 'Creemos algo juntos',
+    subtitle: 'Cada historia comienza con una conversación. La tuya tiene lugar aquí.',
     name: 'Nombre', email: 'Email', subject: 'Asunto', message: 'Mensaje', send: 'Enviar mensaje',
     namePlaceholder: 'Tu nombre', emailPlaceholder: 'tu@email.com',
     subjectPlaceholder: 'Mini-yo, grabado, coleccionable…', messagePlaceholder: 'Describe tu proyecto…',
@@ -193,6 +206,7 @@ const en: Translations = {
   services: {
     heading: 'Services',
     subheading: 'What I can create for you.',
+    cta: 'View completed work',
     miniEu:       { label: 'Mini-me',              description: 'Custom Funko-style figurines that represent you — your profession, sport, hobbies or memories. Inclusive by design.' },
     laser:        { label: 'Laser Engraving',      description: 'Engraving on wood, acrylic, leather and more. Keychains, magnets, artwork and unique gifts with your name or message.' },
     tabletop:     { label: 'Tabletop',             description: 'Tabletop miniatures printed and hand-painted with artisan detail — from heroes to monsters.' },
@@ -204,9 +218,12 @@ const en: Translations = {
   portfolio: {
     heading: 'Portfolio', subheading: 'Your figurine. Your story.', viewAll: 'View all work',
     filter: { all: 'All', miniEu: 'Mini-me', laser: 'Laser', tabletop: 'Tabletop', collectibles: 'Collectibles', cosplay: 'Cosplay', custom: 'Customisables' },
+    works: 'works',
+    comingSoon: 'Coming soon',
   },
   about: {
     heading: 'About', label: 'The story',
+    subtitle: 'Every piece begins with a story. This one is mine.',
     body1: 'I grew up with a natural curiosity for technology and a passion for pop culture — miniatures, anime, games, figures. I painted tabletop miniatures for fun, as a way to switch off and express something that words couldn\'t quite reach. In 2024 I discovered 3D printing and realised I could take that passion to another level — not as a professional, but as someone who never stops learning.',
     body2: 'What followed was a journey I hadn\'t anticipated: 3D modelling, airbrushing, laser engraving — each technique opening the door to the next. With every piece I learn something new. With every piece I leave a little of myself.',
     body3: 'The project that changed everything was the Mini Eu — personalised dioramas that represent real people, with their stories, passions and personality. It was here that I realised I wasn\'t just creating objects. I was preserving moments. Today every commission is a project with soul — whether it\'s a trophy, a diorama or a laser engraving. The detail isn\'t an extra. It\'s the reason for being.',
@@ -214,6 +231,7 @@ const en: Translations = {
   },
   contact: {
     heading: 'Contact', subheading: "Let's create something together",
+    subtitle: 'Every story begins with a conversation. Yours has a place here.',
     name: 'Name', email: 'Email', subject: 'Subject', message: 'Message', send: 'Send message',
     namePlaceholder: 'Your name', emailPlaceholder: 'your@email.com',
     subjectPlaceholder: 'Mini-me, engraving, collectible…', messagePlaceholder: 'Describe your project…',
