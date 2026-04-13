@@ -97,6 +97,7 @@ const ctaLabel = tr.services.cta;
           {services.map((service, i) => (
             <li class={`carousel-slide${i === 0 ? ' is-active' : ''}`} data-index={i} data-key={service.key}>
               <article class="service-card">
+                <span class="card-number">{String(i + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}</span>
                 <span class="service-icon" set:html={service.icon} />
                 <h3 class="service-name">{service.data.label}</h3>
                 <p class="service-desc">{service.data.description}</p>
@@ -190,17 +191,29 @@ const ctaLabel = tr.services.cta;
 
   function goTo(index: number, animate = true) {
     if (!animate) {
+      // desativar transições no track e em todos os slides
       track.style.transition = 'none';
+      allSlides.forEach(s => (s.style.transition = 'none'));
+      void track.offsetHeight; // força reflow
     } else {
       track.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+      allSlides.forEach(s => (s.style.transition = ''));
     }
     current = index;
     setActive(current);
     track.style.transform = `translateX(${getOffset(current)}px)`;
+    if (!animate) {
+      // reativar transições no próximo frame de render
+      requestAnimationFrame(() => {
+        allSlides.forEach(s => (s.style.transition = ''));
+      });
+    }
   }
 
   // After transition: silently jump to real slide if on a clone
-  track.addEventListener('transitionend', () => {
+  track.addEventListener('transitionend', (e) => {
+    // ignorar eventos em bubbling vindos dos slides filhos
+    if (e.target !== track) return;
     if (isJumping) return;
     const len = allSlides.length;
 
@@ -285,27 +298,49 @@ const ctaLabel = tr.services.cta;
     z-index: 2;
   }
 
+  /* ── Card number (MTG style) ── */
+  .card-number {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--terracotta);
+    opacity: 0.7;
+    user-select: none;
+  }
+
   /* ── Card ── */
   .service-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 2.5rem 2.25rem;
-    background: var(--navy);
-    border: 1px solid var(--terracotta);
+    background: var(--off-white);
+    border: 1px solid rgba(28, 36, 56, 0.15);
     border-radius: 12px;
     text-decoration: none;
     min-height: 420px;
-    transition: background 0.2s, border-color 0.2s;
+    box-shadow:
+      0 2px 0 rgba(28, 36, 56, 0.08),
+      0 6px 0 rgba(28, 36, 56, 0.05),
+      0 10px 24px rgba(28, 36, 56, 0.10);
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
   }
 
   .carousel-slide.is-active .service-card:hover {
-    background: #243050;
-    border-color: #d9622f;
+    box-shadow:
+      0 1px 0 rgba(28, 36, 56, 0.08),
+      0 3px 0 rgba(28, 36, 56, 0.05),
+      0 6px 14px rgba(28, 36, 56, 0.10);
+    transform: translateY(3px);
   }
 
   .service-icon {
-    color: var(--cream);
-    opacity: 0.9;
+    color: var(--terracotta);
+    opacity: 1;
     display: block;
     margin-bottom: 2rem;
   }
@@ -314,13 +349,13 @@ const ctaLabel = tr.services.cta;
     font-family: var(--font-serif);
     font-size: 1.4rem;
     font-weight: 400;
-    color: var(--terracotta);
+    color: #000000;
     margin-bottom: 0.875rem;
   }
 
   .service-desc {
     font-size: 0.85rem;
-    color: rgba(232, 212, 176, 0.75);
+    color: #000000;
     line-height: 1.7;
     flex: 1;
   }
@@ -330,23 +365,23 @@ const ctaLabel = tr.services.cta;
     display: inline-block;
     margin-top: 2rem;
     padding: 0.6rem 1.5rem;
-    background: var(--terracotta);
-    border: 1px solid rgba(232, 212, 176, 0.4);
+    background: var(--navy);
+    border: none;
     border-radius: 20px;
-    color: var(--cream);
+    color: #ffffff;
     font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s;
     align-self: flex-start;
   }
 
   .cta-btn:hover {
-    background: #b84a25;
-    color: var(--cream);
+    background: #2a3550;
+    color: #ffffff;
   }
 
   /* ── Arrows ── */

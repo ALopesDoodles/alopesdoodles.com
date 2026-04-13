@@ -1,37 +1,13 @@
 ---
 import type { Translations } from '../i18n/translations';
+import { portfolioItems } from '../data/portfolio';
 
 interface Props {
   tr: Translations;
+  lang: string;
 }
 
-const { tr } = Astro.props;
-
-const items = [
-  // Mini-eu
-  { id: 1,  src: '/gallery/mini-eu-carocha.png',        category: 'miniEu',       aspect: '1/1', alt: 'Diorama em miniatura com Carocha VW, árvore e banco de jardim, pintado à mão' },
-  { id: 2,  src: '/gallery/mini-eu-casamento.png',       category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de casal no bolo de casamento, figuras estilo Funko personalizadas' },
-  { id: 3,  src: '/gallery/mini-eu-ciclista-cao.png',    category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu de ciclista MTB com bicicleta laranja e cão em diorama de floresta' },
-  { id: 4,  src: '/gallery/mini-eu-ciclista-mtb.png',    category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de ciclista MTB com capacete escuro e bicicleta em diorama' },
-  { id: 5,  src: '/gallery/mini-eu-ciclista-roxo.png',   category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de ciclista com capacete roxo e bicicleta em diorama' },
-  { id: 6,  src: '/gallery/mini-eu-guarda-redes.png',    category: 'miniEu',       aspect: '4/3', alt: 'Mini-eu personalizado de guarda-redes "Martim" com baliza em diorama' },
-  { id: 7,  src: '/gallery/mini-eu-trike.png',           category: 'miniEu',       aspect: '3/4', alt: 'Mini-eu de trike de desporto adaptado, ciclismo paralímpico pintado à mão' },
-  // Coleccionáveis
-  { id: 8,  src: '/gallery/col-rei-trono.png',           category: 'collectibles', aspect: '1/1', alt: 'Estatueta coleccionável de rei em trono dourado com detalhes elaborados' },
-  { id: 9,  src: '/gallery/col-michael-jackson.png',     category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável de Michael Jackson — Smooth Criminal, pintada à mão' },
-  { id: 10, src: '/gallery/col-broly.png',               category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável Broly Dragon Ball com base de lava iluminada' },
-  { id: 11, src: '/gallery/col-nightwing.png',           category: 'collectibles', aspect: '3/4', alt: 'Estatueta coleccionável Nightwing DC Comics em pose de acção' },
-  { id: 12, src: '/gallery/col-moana.png',               category: 'collectibles', aspect: '3/4', alt: 'Estatueta chibi de Moana com remo, pintada à mão com detalhes finos' },
-  { id: 13, src: '/gallery/col-stitch-lourenco.png',     category: 'collectibles', aspect: '3/4', alt: 'Stitch personalizado com nome Lourenço, estatueta pintada à mão' },
-  { id: 14, src: '/gallery/col-angel-alexa.png',         category: 'collectibles', aspect: '3/4', alt: 'Angel personalizada com nome Alexa, estatueta pintada à mão em rosa' },
-  { id: 15, src: '/gallery/col-conjunto-1.png',          category: 'collectibles', aspect: '4/3', alt: 'Conjunto de figuras coleccionáveis estilo chibi em exposição' },
-  { id: 16, src: '/gallery/col-conjunto-2.png',          category: 'collectibles', aspect: '4/3', alt: 'Conjunto de figuras coleccionáveis Inside Out pintadas à mão' },
-  // Coming soon placeholders
-  { id: 17, src: null, category: 'laser',      aspect: null, alt: null, comingSoon: true },
-  { id: 18, src: null, category: 'tabletop',   aspect: null, alt: null, comingSoon: true },
-  { id: 19, src: null, category: 'cosplay',    aspect: null, alt: null, comingSoon: true },
-  { id: 20, src: null, category: 'custom',     aspect: null, alt: null, comingSoon: true },
-];
+const { tr, lang } = Astro.props;
 ---
 
 <div class="gallery-section">
@@ -51,33 +27,40 @@ const items = [
     </div>
 
     <div class="gallery-grid" id="gallery-grid" role="list">
-      {items.map(item => (
-        <article class={`gallery-item${item.comingSoon ? ' is-coming-soon' : ''}`} data-category={item.category} data-coming-soon={item.comingSoon ? 'true' : undefined} role="listitem">
-          {item.comingSoon ? (
-            <div class="coming-soon-card">
-              <span>{tr.portfolio.comingSoon}</span>
-            </div>
-          ) : (
-            <button class="gi-btn" data-src={item.src!} data-alt={item.alt!} aria-label={`Ver ${item.alt}`}>
-              <img src={item.src!} alt={item.alt!} class="gi-img" loading="lazy" />
-            </button>
-          )}
+      {portfolioItems.map(item => (
+        <article
+          class={`gallery-item${!item.src ? ' is-coming-soon' : ''}`}
+          data-category={item.category}
+          role="listitem"
+        >
+          <a
+            class="gi-link"
+            href={`/${lang}/portfolio/${item.slug}`}
+            aria-label={item.alt ?? item.title}
+          >
+            {item.src ? (
+              <div class="gi-media">
+                <img src={item.src} alt={item.alt!} class="gi-img" loading="lazy" />
+                <div class="gi-overlay">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="10" cy="10" r="8"/>
+                    <path d="M10 6v8M6 10h8"/>
+                  </svg>
+                  <span class="gi-overlay-text">Ver processo</span>
+                </div>
+              </div>
+            ) : (
+              <div class="coming-soon-card">
+                <span>{tr.portfolio.comingSoon}</span>
+              </div>
+            )}
+          </a>
         </article>
       ))}
     </div>
 
   </div>
 
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada" hidden>
-  <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <path d="M2 2l16 16M18 2L2 18"/>
-    </svg>
-  </button>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
 </div>
 
 <script>
@@ -105,55 +88,17 @@ const items = [
     galleryItems.forEach(item => {
       const show = filter === 'all' || item.dataset.category === filter;
       item.style.display = show ? '' : 'none';
-      if (show && !item.dataset.comingSoon) count++;
+      if (show && !item.classList.contains('is-coming-soon')) count++;
     });
     updateCounter(count);
   }
 
   filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      applyFilter(btn.dataset.filter ?? 'all');
-    });
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter ?? 'all'));
   });
 
-  // Ler filtro do URL (?filter=miniEu) ao carregar a página
   const urlFilter = new URLSearchParams(window.location.search).get('filter') ?? 'all';
   applyFilter(urlFilter);
-
-  // Lightbox
-  const lightbox    = document.getElementById('lightbox') as HTMLElement;
-  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-  const closeBtn    = document.getElementById('lightbox-close') as HTMLButtonElement;
-
-  function openLightbox(src: string, alt: string) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-
-  function closeLightbox() {
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
-    lightboxImg.src = '';
-  }
-
-  document.querySelectorAll<HTMLButtonElement>('.gi-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      openLightbox(btn.dataset.src ?? '', btn.dataset.alt ?? '');
-    });
-  });
-
-  closeBtn.addEventListener('click', closeLightbox);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
-  });
 </script>
 
 <style>
@@ -203,10 +148,7 @@ const items = [
   }
   .filter-btn:hover  { border-color: var(--cream); color: var(--cream); }
   .filter-btn.active { background: var(--terracotta); color: var(--cream); border-color: var(--terracotta); }
-  .filter-btn:focus-visible {
-    outline: 2px solid var(--terracotta);
-    outline-offset: 2px;
-  }
+  .filter-btn:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
 
   .gallery-grid {
     display: grid;
@@ -227,13 +169,17 @@ const items = [
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
-  .gi-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: zoom-in;
+  .gi-link {
     display: block;
-    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ── Media + hover overlay ── */
+  .gi-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
   }
 
   .gi-img {
@@ -242,12 +188,43 @@ const items = [
     object-fit: cover;
     display: block;
     border-radius: 6px;
+    transition: transform 0.35s ease;
   }
 
-  /* Coming soon card */
+  .gi-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(28, 36, 56, 0.78);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--cream);
+    border-radius: 6px;
+  }
+
+  .gi-overlay-text {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .gallery-item:hover .gi-img    { transform: scale(1.04); }
+  .gallery-item:hover .gi-overlay { opacity: 1; }
+
+  /* Coming soon */
   .is-coming-soon {
     box-shadow: none;
     background: transparent;
+  }
+
+  .is-coming-soon:hover {
+    transform: none;
+    box-shadow: none;
   }
 
   .coming-soon-card {
@@ -257,6 +234,11 @@ const items = [
     justify-content: center;
     border: 2px dashed rgba(196, 83, 42, 0.35);
     border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+
+  .is-coming-soon:hover .coming-soon-card {
+    border-color: rgba(196, 83, 42, 0.6);
   }
 
   .coming-soon-card span {
@@ -267,46 +249,6 @@ const items = [
     color: var(--terracotta);
     opacity: 0.7;
   }
-
-  .is-coming-soon:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
-  /* Lightbox */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 12, 20, 0.92);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
-  .lightbox[hidden] { display: none; }
-
-  .lightbox-img {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-    box-shadow: 0 8px 48px rgba(0,0,0,0.5);
-  }
-
-  .lightbox-close {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 0.5rem;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-  .lightbox-close:hover { opacity: 1; }
-
 
   /* Monitor vertical (768px–1024px) */
   @media (max-width: 1024px) and (min-width: 769px) {
