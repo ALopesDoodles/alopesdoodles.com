@@ -29,7 +29,7 @@ const { tr, lang } = Astro.props;
     </div>
 
     <div class="hero-deco" aria-hidden="true">
-      <img src="/gallery/Alopes%20Cartoon.jpg" alt="" aria-hidden="true" class="hero-cartoon-img" />
+      <img src="/gallery/Alopes%20Cartoon.png" alt="" aria-hidden="true" class="hero-cartoon-img" />
     </div>
 
   </div>
@@ -62,6 +62,7 @@ const { tr, lang } = Astro.props;
     width: clamp(160px, 22vw, 280px);
     aspect-ratio: 1;
     object-fit: contain;
+    filter: drop-shadow(0 6px 18px rgba(28, 36, 56, 0.35));
   }
 
   .hero-tagline {

@@ -115,7 +115,7 @@ const ctaLabel = tr.services.cta;
   const cloneEnd1 = realSlides[0].cloneNode(true) as HTMLElement;
   const cloneEnd2 = realSlides[1].cloneNode(true) as HTMLElement;
 
-  [cloneStart1, cloneStart2].forEach(c => {
+  [cloneStart2, cloneStart1].forEach(c => {
     c.classList.remove('is-active');
     c.setAttribute('aria-hidden', 'true');
     track.prepend(c);
@@ -291,10 +291,7 @@ const ctaLabel = tr.services.cta;
     border-radius: 12px;
     text-decoration: none;
     height: 500px;
-    box-shadow:
-      0 2px 0 rgba(28, 36, 56, 0.08),
-      0 6px 0 rgba(28, 36, 56, 0.05),
-      0 10px 24px rgba(28, 36, 56, 0.10);
+    box-shadow: 0 4px 20px rgba(28, 36, 56, 0.18);
     transition: box-shadow 0.18s ease, transform 0.18s ease;
   }
 

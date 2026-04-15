@@ -116,9 +116,10 @@ const images = [
   .marquee-btn { flex-shrink: 0; align-self: flex-end; }
 
   .marquee-outer {
-    overflow: hidden;
+    overflow-x: clip;
     width: 100%;
     margin-bottom: var(--section-py);
+    padding-bottom: 16px;
   }
 
   .marquee-inner {
@@ -126,6 +127,7 @@ const images = [
     gap: 1rem;
     width: max-content;
     animation: marquee 50s linear infinite;
+    padding-bottom: 4px;
   }
 
 
@@ -139,11 +141,12 @@ const images = [
   .marquee-item img {
     height: 280px;
     width: auto;
-    border-radius: 0.5rem;
+    border-radius: 0;
     object-fit: cover;
     display: block;
     -webkit-touch-callout: none;
     pointer-events: none;
+    box-shadow: 0 4px 18px rgba(28, 36, 56, 0.30);
   }
 
   @keyframes marquee {

@@ -105,6 +105,7 @@ button { font-family: inherit; cursor: pointer; }
 .btn-primary {
   background: var(--terracotta);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(28, 36, 56, 0.28);
 }
 .btn-primary:hover { background: #a8421e; }
 
