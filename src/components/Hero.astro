@@ -90,17 +90,34 @@ const { tr, lang } = Astro.props;
     width: 100%;
     max-width: 480px;
     border-radius: 1rem;
-    object-fit: cover;
+    object-fit: contain;
   }
 
-  @media (max-width: 900px) {
-    .hero { min-height: auto; padding: 1.5rem 0; overflow: hidden; }
-    .hero-inner { grid-template-columns: 1fr; text-align: center; padding-top: 0; padding-bottom: 0; }
-    .hero-badge, .hero-tagline { display: block; }
+  /* ── Monitor vertical (768–1024px) ── */
+  @media (max-width: 1024px) {
+    .hero-inner { gap: 2rem; }
+    .hero-cartoon-img { max-width: 360px; }
+  }
+
+  /* ── Mobile (<768px) ── */
+  @media (max-width: 768px) {
+    .hero { min-height: auto; padding: 1.5rem 0; }
+    .hero-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
     .hero-subtitle { margin-left: auto; margin-right: auto; }
     .hero-cta { justify-content: center; }
     .hero-logo-img { width: clamp(120px, 35vw, 200px); display: block; margin: 0 auto; }
-    .hero-deco { height: 240px; overflow: hidden; margin-bottom: 1.5rem; }
-    .hero-cartoon-img { max-width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .hero-deco { margin-bottom: 1.5rem; }
+    .hero-cartoon-img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
   }
 </style>

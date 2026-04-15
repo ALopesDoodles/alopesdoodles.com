@@ -47,7 +47,7 @@ const categoryLabel = (cat: string) => {
 
     <ul class="gp-grid" role="list">
       {items.map(item => (
-        <li role="listitem">
+        <li role="listitem" style="background:#fff; padding:6px 6px 18px 6px; border-radius:3px; box-shadow: 0 2px 4px rgba(28,36,56,0.15), 0 8px 20px rgba(28,36,56,0.22);">
           <a href={`/${lang}/portfolio`} class="gp-item" aria-label={item.alt}>
             <img
               src={item.src}
@@ -86,17 +86,26 @@ const categoryLabel = (cat: string) => {
     margin: 0;
   }
 
+  .gp-grid li {
+    border-radius: 4px;
+    box-shadow:
+      0 2px 0 rgba(28, 36, 56, 0.18),
+      0 5px 0 rgba(28, 36, 56, 0.12),
+      0 9px 18px rgba(28, 36, 56, 0.22);
+  }
+
   .gp-item {
     display: block;
     position: relative;
     overflow: hidden;
+    border-radius: 4px;
   }
   .gp-item:focus-visible {
     outline: 2px solid var(--terracotta);
     outline-offset: 2px;
   }
 
-  .gp-img { width: 100%; transition: transform 0.4s ease; }
+  .gp-img { width: 100%; display: block; border-radius: 4px; transition: transform 0.4s ease; }
 
   .gp-overlay {
     position: absolute;
