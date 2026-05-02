@@ -3,10 +3,11 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import { t } from '../../../i18n/translations';
-import { portfolioItems } from '../../../data/portfolio';
+import { getGalleryItems } from '../../../data/gallery';
 
 export function getStaticPaths() {
-  return portfolioItems.flatMap(item =>
+  const items = getGalleryItems();
+  return items.flatMap(item =>
     ['pt', 'es', 'en'].map(lang => ({
       params: { lang, slug: item.slug },
       props: { item },
@@ -23,15 +24,14 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
 
 <Layout
   lang={lang}
-  title={`${item.title} — A.Lopes Doodles`}
-  description={item.alt ?? item.title}
+  title={`${categoryLabel} — A.Lopes Doodles`}
+  description={categoryLabel}
   canonicalPath={`/${lang}/portfolio/${slug}`}
 >
   <Header lang={lang} currentPage="portfolio" tr={tr} />
 
   <main id="main-content" tabindex="-1">
 
-    <!-- Hero do trabalho -->
     <section class="section work-hero">
       <div class="container">
         <a href={`/${lang}/portfolio`} class="back-link">
@@ -43,7 +43,6 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
         <div class="work-meta">
           <span class="category-badge">{categoryLabel}</span>
         </div>
-        <h1 class="work-title">{item.title}</h1>
       </div>
     </section>
 
@@ -56,46 +55,39 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
         <div class="work-section">
           <h2 class="work-section-label">Resultado Final</h2>
           <div class="result-wrap">
-            {item.src ? (
-              <button class="lb-trigger" data-src={item.src} data-alt={item.alt!} aria-label={`Ampliar: ${item.alt}`}>
-                <img src={item.src} alt={item.alt!} class="result-img" />
-              </button>
-            ) : (
-              <div class="placeholder-hero">
-                <span class="placeholder-text">Fotografia em breve</span>
-              </div>
-            )}
+            <button class="lb-trigger" data-src={item.display} data-alt={categoryLabel} aria-label={`Ampliar: ${categoryLabel}`}>
+              <img src={item.display} alt={categoryLabel} class="result-img" />
+            </button>
           </div>
         </div>
 
         <!-- Processo de Criação -->
-        <div class="work-section">
-          <h2 class="work-section-label">Processo de Criação</h2>
-          <p class="work-section-sub">Modelação 3D, impressão e detalhes de pintura</p>
-          <div class="process-grid">
-            {['Modelação 3D', 'Impressão', 'Lixagem e preparação', 'Pintura base'].map(step => (
-              <div class="process-card">
-                <div class="process-img-placeholder">
-                  <span class="placeholder-text">Em breve</span>
-                </div>
-                <p class="process-label">{step}</p>
-              </div>
-            ))}
+        {item.process.length > 0 && (
+          <div class="work-section">
+            <h2 class="work-section-label">Processo de Criação</h2>
+            <div class="process-grid">
+              {item.process.map((src, i) => (
+                <button class="lb-trigger process-trigger" data-src={src} data-alt={`Processo ${i + 1}`} aria-label={`Ampliar processo ${i + 1}`}>
+                  <img src={src} alt={`Processo ${i + 1}`} class="process-img" loading="lazy" />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <!-- Fotografias -->
-        <div class="work-section">
-          <h2 class="work-section-label">Fotografias</h2>
-          <p class="work-section-sub">Imagens do resultado final em detalhe</p>
-          <div class="photos-grid">
-            {[1, 2, 3].map(() => (
-              <div class="photo-placeholder">
-                <span class="placeholder-text">Em breve</span>
-              </div>
-            ))}
+        {item.final.length > 0 && (
+          <div class="work-section">
+            <h2 class="work-section-label">Fotografias</h2>
+            <div class="photos-grid">
+              {item.final.map((src, i) => (
+                <button class="lb-trigger photo-trigger" data-src={src} data-alt={`Fotografia ${i + 1}`} aria-label={`Ampliar fotografia ${i + 1}`}>
+                  <img src={src} alt={`Fotografia ${i + 1}`} class="photo-img" loading="lazy" />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
     </section>
@@ -113,6 +105,7 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
   </div>
 
   <Footer tr={tr} lang={lang} />
+
 <script>
   const lightbox    = document.getElementById('lightbox') as HTMLElement;
   const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
@@ -144,7 +137,6 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
 </Layout>
 
 <style>
-  /* ── Hero ── */
   .work-hero { padding-bottom: 2.5rem; }
 
   .back-link {
@@ -176,43 +168,22 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
     border-radius: 20px;
   }
 
-  .work-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400;
-    color: var(--navy);
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  /* ── Body ── */
   .work-body { padding-top: 3rem; }
 
-  .work-section {
-    margin-bottom: 4rem;
-  }
+  .work-section { margin-bottom: 4rem; }
 
   .work-section-label {
     font-family: var(--font-serif);
     font-size: 1.1rem;
     font-weight: 400;
     color: var(--navy);
-    margin-bottom: 0.35rem;
+    margin-bottom: 1.25rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(28, 36, 56, 0.12);
   }
 
-  .work-section-sub {
-    font-size: 0.82rem;
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    margin-top: 0.35rem;
-  }
-
-  /* ── Resultado final ── */
-  .result-wrap {
-    max-width: 480px;
-  }
+  /* Resultado Final */
+  .result-wrap { max-width: 480px; }
 
   .result-img {
     width: 100%;
@@ -221,64 +192,45 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
     box-shadow: 0 4px 24px rgba(28, 36, 56, 0.12);
   }
 
-  .placeholder-hero {
-    width: 100%;
-    max-width: 480px;
-    aspect-ratio: 3 / 4;
-    border: 2px dashed rgba(196, 83, 42, 0.35);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* ── Processo ── */
+  /* Processo */
   .process-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
   }
 
-  .process-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
+  .process-trigger { border-radius: 10px; }
 
-  .process-img-placeholder {
+  .process-img {
+    width: 100%;
     aspect-ratio: 1 / 1;
-    border: 2px dashed rgba(196, 83, 42, 0.35);
+    object-fit: cover;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    box-shadow: 0 2px 12px rgba(28, 36, 56, 0.1);
+    transition: transform 0.2s ease;
   }
+  .process-trigger:hover .process-img { transform: scale(1.02); }
 
-  .process-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--gray);
-    text-align: center;
-  }
-
-  /* ── Fotografias ── */
+  /* Fotografias */
   .photos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
-  .photo-placeholder {
-    aspect-ratio: 4 / 3;
-    border: 2px dashed rgba(196, 83, 42, 0.35);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .photo-trigger { border-radius: 10px; }
 
-  /* ── Result image trigger ── */
+  .photo-img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 2px 12px rgba(28, 36, 56, 0.1);
+    transition: transform 0.2s ease;
+  }
+  .photo-trigger:hover .photo-img { transform: scale(1.02); }
+
+  /* Triggers */
   .lb-trigger {
     background: none;
     border: none;
@@ -287,14 +239,13 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
     display: block;
     width: 100%;
   }
-
   .lb-trigger:focus-visible {
     outline: 2px solid var(--terracotta);
     outline-offset: 3px;
     border-radius: 12px;
   }
 
-  /* ── Lightbox ── */
+  /* Lightbox */
   .lightbox {
     position: fixed;
     inset: 0;
@@ -329,27 +280,13 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
   }
   .lightbox-close:hover { opacity: 1; }
 
-  /* ── Placeholder text ── */
-  .placeholder-text {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    opacity: 0.6;
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .photos-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* ── Monitor vertical (768–1024px) ── */
-  @media (max-width: 1024px) and (min-width: 769px) {
+  @media (max-width: 768px) {
+    .result-wrap  { max-width: 100%; }
     .process-grid { grid-template-columns: repeat(2, 1fr); }
     .photos-grid  { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  /* ── Mobile (<768px) ── */
-  @media (max-width: 768px) {
-    .work-title { font-size: 1.75rem; }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .photos-grid  { grid-template-columns: repeat(1, 1fr); }
-    .result-wrap  { max-width: 100%; }
   }
 </style>
