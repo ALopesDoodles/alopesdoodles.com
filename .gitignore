@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# gallery originals backup (local only)
+public/gallery/_backup/
