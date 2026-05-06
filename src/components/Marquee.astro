@@ -1,0 +1,161 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  tr: Translations;
+  lang: string;
+}
+
+const { tr, lang } = Astro.props;
+
+const images = [
+  { src: '/gallery/mini-eu-carocha.png',       alt: 'Diorama mini-eu com Carocha VW',       category: 'miniEu'       },
+  { src: '/gallery/col-broly.png',             alt: 'Coleccionável Broly',                  category: 'collectibles' },
+  { src: '/gallery/mini-eu-casamento.png',     alt: 'Mini-eu de casal',                     category: 'miniEu'       },
+  { src: '/gallery/col-michael-jackson.png',   alt: 'Coleccionável Michael Jackson',        category: 'collectibles' },
+  { src: '/gallery/mini-eu-ciclista-cao.png',  alt: 'Mini-eu ciclista com cão',             category: 'miniEu'       },
+  { src: '/gallery/col-nightwing.png',         alt: 'Coleccionável Nightwing',              category: 'collectibles' },
+  { src: '/gallery/mini-eu-ciclista-mtb.png',  alt: 'Mini-eu ciclista MTB',                category: 'miniEu'       },
+  { src: '/gallery/col-moana.png',             alt: 'Coleccionável Moana',                  category: 'collectibles' },
+  { src: '/gallery/mini-eu-guarda-redes.png',  alt: 'Mini-eu guarda-redes',                category: 'miniEu'       },
+  { src: '/gallery/col-rei-trono.png',         alt: 'Coleccionável rei no trono',           category: 'collectibles' },
+  { src: '/gallery/mini-eu-trike.png',         alt: 'Mini-eu trike',                        category: 'miniEu'       },
+  { src: '/gallery/col-angel-alexa.png',       alt: 'Coleccionável Angel e Alexa',          category: 'collectibles' },
+  { src: '/gallery/mini-eu-ciclista-roxo.png', alt: 'Mini-eu ciclista roxo',               category: 'miniEu'       },
+  { src: '/gallery/col-stitch-lourenco.png',   alt: 'Coleccionável Stitch Lourenço',        category: 'collectibles' },
+  { src: '/gallery/col-conjunto-1.png',        alt: 'Conjunto de coleccionáveis',           category: 'collectibles' },
+  { src: '/gallery/col-conjunto-2.png',        alt: 'Conjunto de coleccionáveis 2',         category: 'collectibles' },
+];
+---
+
+<section class="marquee-section" aria-labelledby="marquee-heading">
+  <div class="container marquee-header">
+    <div>
+      <p class="label">{tr.marquee.heading}</p>
+      <h2 class="section-title" id="marquee-heading">{tr.marquee.subheading}</h2>
+    </div>
+  </div>
+
+  <div class="marquee-outer">
+    <div class="marquee-inner">
+      {[...images, ...images].map((img, i) => (
+        <div
+          class="marquee-item"
+          role="link"
+          tabindex={i >= images.length ? -1 : 0}
+          data-href={`/${lang}/portfolio?filter=${img.category}`}
+          aria-label={img.alt}
+          aria-hidden={i >= images.length ? 'true' : 'false'}
+        >
+          <img src={img.src} alt={img.alt} loading="lazy" draggable="false" />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <hr class="divider" />
+</section>
+
+<script>
+  const outer = document.querySelector<HTMLElement>('.marquee-outer');
+  const inner = document.querySelector<HTMLElement>('.marquee-inner');
+  const items = document.querySelectorAll<HTMLElement>('.marquee-item[data-href]');
+
+  function pause() { if (inner) inner.style.animationPlayState = 'paused'; }
+  function resume() { if (inner) inner.style.animationPlayState = 'running'; }
+
+  // Desktop
+  outer?.addEventListener('mouseenter', pause);
+  outer?.addEventListener('mouseleave', resume);
+
+  // Mobile
+  outer?.addEventListener('touchstart', pause, { passive: true });
+  outer?.addEventListener('touchend', resume);
+  outer?.addEventListener('touchcancel', resume);
+
+  items.forEach(item => {
+    let touchStart = 0;
+
+    item.addEventListener('touchstart', () => {
+      touchStart = Date.now();
+    }, { passive: true });
+
+    item.addEventListener('touchend', (e) => {
+      if (Date.now() - touchStart < 200) {
+        e.preventDefault();
+        window.location.href = item.dataset.href!;
+      }
+    });
+
+    item.addEventListener('click', () => {
+      window.location.href = item.dataset.href!;
+    });
+
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = item.dataset.href!;
+      }
+    });
+  });
+</script>
+
+<style>
+  .marquee-section {
+    padding-top: var(--section-py);
+  }
+
+  .marquee-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .marquee-btn { flex-shrink: 0; align-self: flex-end; }
+
+  .marquee-outer {
+    overflow-x: clip;
+    width: 100%;
+    margin-bottom: var(--section-py);
+    padding-bottom: 16px;
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee 50s linear infinite;
+    padding-bottom: 4px;
+  }
+
+
+  .marquee-item {
+    flex-shrink: 0;
+    display: block;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  .marquee-item img {
+    height: 280px;
+    width: auto;
+    border-radius: 0;
+    object-fit: cover;
+    display: block;
+    -webkit-touch-callout: none;
+    pointer-events: none;
+    box-shadow: 0 4px 18px rgba(28, 36, 56, 0.30);
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    .marquee-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+    .marquee-item img { height: 200px; }
+  }
+</style>

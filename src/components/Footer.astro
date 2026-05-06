@@ -1,0 +1,143 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  tr: Translations;
+  lang: string;
+}
+
+const { tr, lang } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <img src="/logo.png" alt="A.Lopes Doodles" class="footer-logo-img" />
+      <p class="footer-tagline">{tr.footer.tagline}</p>
+      <p class="footer-location">
+        <span class="label">{tr.footer.madeIn}</span>
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href={`/${lang}/portfolio`}>{tr.nav.portfolio}</a>
+      <span class="sep">·</span>
+      <a href={`/${lang}/about`}>{tr.nav.about}</a>
+      <span class="sep">·</span>
+      <a href={`/${lang}/contact`}>{tr.nav.contact}</a>
+    </nav>
+
+    <div class="footer-social">
+      <a href="https://www.instagram.com/a.lopesdoodlesworkshop" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/share/1Hsz5mHw4U/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-copyright">
+    <div class="container">
+      <p>{tr.footer.rights}</p>
+    </div>
+  </div>
+</footer>
+
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: var(--cream);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  /* ── Brand ── */
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .footer-logo-img {
+    width: 60px;
+    object-fit: contain;
+  }
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(232, 212, 176, 0.5);
+    line-height: 1.6;
+    max-width: 22rem;
+  }
+  .footer-location .label {
+    color: var(--terracotta);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* ── Nav ── */
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .footer-nav a {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(232, 212, 176, 0.5);
+    transition: color 0.2s;
+  }
+  .footer-nav a:hover { color: var(--cream); }
+  .sep {
+    color: rgba(232, 212, 176, 0.2);
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  /* ── Social ── */
+  .footer-social {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  .footer-social a {
+    color: rgba(232, 212, 176, 0.45);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--terracotta); }
+
+
+  /* ── Copyright ── */
+  .footer-copyright {
+    border-top: 1px solid rgba(232, 212, 176, 0.1);
+    padding: 1.25rem 0;
+    text-align: center;
+  }
+  .footer-copyright p {
+    font-size: 0.7rem;
+    color: rgba(232, 212, 176, 0.3);
+    letter-spacing: 0.05em;
+  }
+</style>

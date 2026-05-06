@@ -1,0 +1,216 @@
+---
+import type { Translations } from '../i18n/translations';
+import { galleryItems } from '../data/gallery';
+
+interface Props {
+  tr: Translations;
+  lang: string;
+}
+
+const { tr, lang } = Astro.props;
+---
+
+<div class="gallery-section">
+
+  <div class="gallery-panel">
+
+    <div class="panel-header">
+      <div class="filter-bar" role="group" aria-label={tr.portfolio.heading}>
+        <button class="filter-btn active" data-filter="all">{tr.portfolio.filter.all}</button>
+        <button class="filter-btn" data-filter="miniEu">{tr.portfolio.filter.miniEu}</button>
+        <button class="filter-btn" data-filter="collectibles">{tr.portfolio.filter.collectibles}</button>
+        <button class="filter-btn" data-filter="laser">{tr.portfolio.filter.laser}</button>
+        <button class="filter-btn" data-filter="tabletop">{tr.portfolio.filter.tabletop}</button>
+        <button class="filter-btn" data-filter="cosplay">{tr.portfolio.filter.cosplay}</button>
+        <button class="filter-btn" data-filter="custom">{tr.portfolio.filter.custom}</button>
+      </div>
+      <span class="results-count" id="results-count" aria-live="polite" data-label={tr.portfolio.works}></span>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid" role="list">
+      {galleryItems.map(item => {
+        const label = tr.portfolio.filter[item.category as keyof typeof tr.portfolio.filter] ?? item.category;
+        return (
+          <article class="gallery-item" data-category={item.category} role="listitem">
+            <a class="gi-link" href={`/${lang}/portfolio/${item.slug}`} aria-label={label}>
+              <div class="gi-media">
+                <img src={item.display} alt={label} class="gi-img" loading="lazy" />
+                <div class="gi-overlay">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="10" cy="10" r="8"/>
+                    <path d="M10 6v8M6 10h8"/>
+                  </svg>
+                  <span class="gi-overlay-text">Ver processo</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  const filterBtns   = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
+  const counter      = document.getElementById('results-count') as HTMLElement;
+  const worksLabel   = counter?.dataset.label ?? 'works';
+
+  function updateCounter(count: number) {
+    if (counter) counter.textContent = `${count} ${worksLabel}`;
+  }
+
+  function applyFilter(filter: string) {
+    filterBtns.forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    const active = document.querySelector<HTMLButtonElement>(`.filter-btn[data-filter="${filter}"]`)
+      ?? document.querySelector<HTMLButtonElement>('.filter-btn[data-filter="all"]');
+    active?.classList.add('active');
+    active?.setAttribute('aria-pressed', 'true');
+
+    let count = 0;
+    galleryItems.forEach(item => {
+      const show = filter === 'all' || item.dataset.category === filter;
+      item.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+    updateCounter(count);
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter ?? 'all'));
+  });
+
+  const urlFilter = new URLSearchParams(window.location.search).get('filter') ?? 'all';
+  applyFilter(urlFilter);
+</script>
+
+<style>
+  .gallery-panel {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .results-count {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(232, 212, 176, 0.45);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.45rem 1.1rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: rgba(232, 212, 176, 0.6);
+    border: 1px solid rgba(232, 212, 176, 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover  { border-color: var(--cream); color: var(--cream); }
+  .filter-btn.active { background: var(--terracotta); color: var(--cream); border-color: var(--terracotta); }
+  .filter-btn:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    background: var(--off-white);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .gi-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gi-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .gi-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    transition: transform 0.35s ease;
+  }
+
+  .gi-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(28, 36, 56, 0.78);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--cream);
+    border-radius: 6px;
+  }
+
+  .gi-overlay-text {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .gallery-item:hover .gi-img     { transform: scale(1.04); }
+  .gallery-item:hover .gi-overlay { opacity: 1; }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-panel { padding: 1.25rem; border-radius: 12px; }
+    .gallery-grid  { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .gallery-item  { padding: 7px; }
+  }
+</style>

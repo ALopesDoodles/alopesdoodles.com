@@ -1,0 +1,76 @@
+CLAUDE CODE — MEMÓRIAS DO PROJETO
+===================================
+
+Este ficheiro explica como funcionam as memórias do Claude Code
+e como as configurar num PC novo.
+
+
+O QUE SÃO AS MEMÓRIAS
+----------------------
+O Claude Code guarda dois tipos de contexto:
+
+1. CLAUDE.md (este repositório)
+   - Ficheiro dentro do projeto, vai para o git
+   - Carregado automaticamente em qualquer PC que abra este repo
+   - Contém regras de workflow, contexto do projeto, stack técnica
+   - Não precisas de fazer nada — funciona sozinho
+
+2. Memórias automáticas (pasta local no PC)
+   - Ficheiros fora do git, guardados no perfil do utilizador Windows
+   - O Claude aprende e actualiza estas memórias ao longo das conversas
+   - Contêm preferências, feedback, estratégia do projecto
+   - NÃO viajam automaticamente para outro PC
+
+
+ONDE FICAM AS MEMÓRIAS NO WINDOWS
+----------------------------------
+Caminho completo:
+
+  C:\Users\antonio.lopes\.claude\projects\d--projects-alopesdoodles\memory\
+
+Ficheiros actuais:
+  - MEMORY.md               (índice de todas as memórias)
+  - feedback_planning.md    (regra: analisar → propor → pedir autorização)
+  - feedback_commit_workflow.md  (regra: nunca commit/push sem ordem explícita)
+  - feedback_responsive.md  (regra: sempre 3 formatos — horizontal/vertical/mobile)
+  - project_strategy.md     (contexto: Vinted, estúdio solo, voz singular)
+
+
+COMO CARREGAR AS MEMÓRIAS NUM PC NOVO
+--------------------------------------
+Opção A — Copiar a pasta (recomendado)
+
+  1. No PC original, copia a pasta inteira:
+     C:\Users\antonio.lopes\.claude\
+
+  2. No PC novo, cola em:
+     C:\Users\<teu-utilizador>\.claude\
+
+  3. Abre o projeto no Claude Code — as memórias são carregadas automaticamente.
+
+  Nota: se o nome de utilizador for diferente no PC novo, o caminho da pasta
+  de memórias do projeto muda. O Claude pode não as encontrar automaticamente.
+  Nesse caso usa a Opção B.
+
+
+Opção B — Só o CLAUDE.md (mais simples, menos completo)
+
+  O ficheiro CLAUDE.md já está no repositório.
+  Quando abrires o projeto em qualquer PC, o Claude lê esse ficheiro
+  automaticamente e conhece as regras essenciais do projecto.
+
+  As memórias de feedback mais detalhadas não estarão disponíveis,
+  mas as regras principais estão todas documentadas no CLAUDE.md.
+
+
+RESUMO
+------
+  Regras do projecto       → CLAUDE.md (no git, automático)
+  Memórias de aprendizagem → C:\Users\antonio.lopes\.claude\... (local, copiar manualmente)
+  PC novo sem cópia        → CLAUDE.md garante o essencial
+
+
+NOTA PARA O CLAUDE
+------------------
+Se estás a ler isto num PC novo sem memórias locais, lê o CLAUDE.md
+na raiz do projecto — contém todas as regras e contexto necessários.

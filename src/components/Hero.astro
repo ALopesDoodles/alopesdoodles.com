@@ -1,0 +1,123 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  tr: Translations;
+  lang: string;
+}
+
+const { tr, lang } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero-inner">
+
+    <div class="hero-content">
+      <p class="label hero-badge">{tr.hero.badge}</p>
+
+      <h1 class="hero-title" id="hero-title">
+        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" />
+      </h1>
+
+      <p class="hero-tagline">{tr.hero.tagline}</p>
+      <p class="hero-subtitle">{tr.hero.subtitle}</p>
+
+      <div class="hero-cta">
+        <a href={`/${lang}/portfolio`} class="btn btn-primary">{tr.hero.cta}</a>
+        <a href={`/${lang}/contact`} class="btn btn-outline">{tr.hero.ctaSecondary}</a>
+      </div>
+    </div>
+
+    <div class="hero-deco" aria-hidden="true">
+      <img src="/gallery/Alopes%20Cartoon.png" alt="" aria-hidden="true" class="hero-cartoon-img" />
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+  }
+
+  .hero-badge { margin-bottom: 2rem; }
+
+  .hero-title {
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-logo-img {
+    width: clamp(160px, 22vw, 280px);
+    aspect-ratio: 1;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 18px rgba(28, 36, 56, 0.35));
+  }
+
+  .hero-tagline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.88rem, 1.6vw, 0.97rem);
+    color: var(--gray);
+    max-width: 38rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-deco { display: flex; justify-content: center; align-items: center; }
+
+  .hero-cartoon-img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 1rem;
+    object-fit: contain;
+  }
+
+  /* ── Monitor vertical (768–1024px) ── */
+  @media (max-width: 1024px) {
+    .hero-inner { gap: 2rem; }
+    .hero-cartoon-img { max-width: 360px; }
+  }
+
+  /* ── Mobile (<768px) ── */
+  @media (max-width: 768px) {
+    .hero { min-height: auto; padding: 1.5rem 0; }
+    .hero-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
+    .hero-logo-img { width: clamp(120px, 35vw, 200px); display: block; margin: 0 auto; }
+    .hero-deco { margin-bottom: 1.5rem; }
+    .hero-cartoon-img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+</style>
