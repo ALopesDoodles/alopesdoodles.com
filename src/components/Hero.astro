@@ -17,7 +17,7 @@ const { tr, lang } = Astro.props;
 
       <h1 class="hero-title" id="hero-title">
         <span class="sr-only">{tr.seo.home.title}</span>
-        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" aria-hidden="true" />
+        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" aria-hidden="true" fetchpriority="high" />
       </h1>
 
       <p class="hero-tagline">{tr.hero.tagline}</p>
@@ -30,7 +30,7 @@ const { tr, lang } = Astro.props;
     </div>
 
     <div class="hero-deco" aria-hidden="true">
-      <img src="/gallery/Alopes%20Cartoon.png" alt="" aria-hidden="true" class="hero-cartoon-img" />
+      <img src="/gallery/Alopes%20Cartoon.webp" alt="" aria-hidden="true" class="hero-cartoon-img" fetchpriority="high" />
     </div>
 
   </div>

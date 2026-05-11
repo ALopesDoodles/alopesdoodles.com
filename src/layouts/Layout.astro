@@ -74,8 +74,13 @@ const jsonLd = {
     <!-- Hreflang (multilingual) -->
     <link rel="alternate" hreflang="pt-PT" href={hreflangUrls.pt} />
     <link rel="alternate" hreflang="es-ES" href={hreflangUrls.es} />
-    <link rel="alternate" hreflang="en"    href={hreflangUrls.en} />
+    <link rel="alternate" hreflang="en-US" href={hreflangUrls.en} />
     <link rel="alternate" hreflang="x-default" href={hreflangUrls.pt} />
+
+    <!-- Prefetch main navigation pages -->
+    <link rel="prefetch" href={`/${lang}/portfolio`} />
+    <link rel="prefetch" href={`/${lang}/about`} />
+    <link rel="prefetch" href={`/${lang}/contact`} />
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) -->
     <meta property="og:type"        content="website" />

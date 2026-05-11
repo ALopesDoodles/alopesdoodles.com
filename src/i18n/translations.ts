@@ -99,7 +99,7 @@ const pt: Translations = {
     siteName: 'A.Lopes Doodles',
     home:      { title: 'A.Lopes Doodles — Estatuetas Colecionáveis e figuras mini-eu estilo Funko impressas em Resina 3D e Gravação Laser em Portugal', description: 'Estatuetas colecionáveis e figuras mini-eu personalizadas estilo Funko, impressas em resina 3D, e gravação laser em Portugal. Pedidos personalizados.' },
     portfolio: { title: 'Portfólio — Estatuetas e mini-eu estilo Funko em Resina 3D e Gravação Laser | A.Lopes Doodles', description: 'Galeria de estatuetas colecionáveis, mini-eu estilo Funko em resina 3D, gravação laser e tabletop. Cada peça é única, feita em Portugal.' },
-    about:     { title: 'Sobre — Criador de Estatuetas e Mini-eu Funko em Resina 3D em Portugal | A.Lopes Doodles', description: 'A história por trás do A.Lopes Doodles — criador de estatuetas colecionáveis e figuras mini-eu estilo Funko impressas em resina 3D e gravação laser em Portugal.' },
+    about:     { title: 'Sobre — Criador de Estatuetas e Mini-eu Funko em Resina 3D em Portugal | A.Lopes Doodles', description: 'A história por trás do A.Lopes Doodles — estatuetas colecionáveis e figuras mini-eu estilo Funko impressas em resina 3D e gravação laser em Portugal.' },
     contact:   { title: 'Contacto — Pedidos de Estatuetas, Mini-eu Funko e Gravação Laser | A.Lopes Doodles', description: 'Entra em contacto para pedidos de estatuetas colecionáveis, figuras mini-eu estilo Funko em resina 3D e gravação laser em Portugal.' },
   },
   faq: {
@@ -173,7 +173,7 @@ const es: Translations = {
     siteName: 'A.Lopes Doodles',
     home:      { title: 'A.Lopes Doodles — Figuras Coleccionables y mini-yo estilo Funko impresas en Resina 3D y Grabado Láser en Portugal', description: 'Figuras coleccionables y mini-yo personalizados estilo Funko, impresos en resina 3D, y grabado láser en Portugal. Pedidos personalizados.' },
     portfolio: { title: 'Portafolio — Figuras y mini-yo estilo Funko en Resina 3D y Grabado Láser | A.Lopes Doodles', description: 'Galería de figuras coleccionables, mini-yo estilo Funko en resina 3D, grabado láser y tabletop. Cada pieza es única, hecha en Portugal.' },
-    about:     { title: 'Sobre mí — Creador de Figuras y Mini-yo Funko en Resina 3D en Portugal | A.Lopes Doodles', description: 'La historia detrás de A.Lopes Doodles — creador de figuras coleccionables y mini-yo estilo Funko impresas en resina 3D y grabado láser en Portugal.' },
+    about:     { title: 'Sobre mí — Creador de Figuras y Mini-yo Funko en Resina 3D en Portugal | A.Lopes Doodles', description: 'La historia detrás de A.Lopes Doodles — figuras coleccionables y mini-yo estilo Funko impresas en resina 3D y grabado láser en Portugal.' },
     contact:   { title: 'Contacto — Pedidos de Figuras, Mini-yo Funko y Grabado Láser | A.Lopes Doodles', description: 'Contacta para pedidos de figuras coleccionables, mini-yo estilo Funko en resina 3D y grabado láser en Portugal.' },
   },
   faq: {
@@ -247,7 +247,7 @@ const en: Translations = {
     siteName: 'A.Lopes Doodles',
     home:      { title: 'A.Lopes Doodles — Collectible Figurines and Funko-style Mini-me 3D Resin Printed and Laser Engraving from Portugal', description: 'Collectible figurines and custom Funko-style mini-me, 3D resin printed, and laser engraving from Portugal. Custom orders welcome.' },
     portfolio: { title: 'Portfolio — Figurines and Funko-style Mini-me in 3D Resin and Laser Engraving | A.Lopes Doodles', description: 'Gallery of collectible figurines, Funko-style mini-me in 3D resin, laser engraving and tabletop. Each piece is unique, made in Portugal.' },
-    about:     { title: 'About — Creator of Collectible Figurines and Funko-style Mini-me in 3D Resin from Portugal | A.Lopes Doodles', description: 'The story behind A.Lopes Doodles — creator of collectible figurines and Funko-style mini-me 3D resin printed and laser engraving from Portugal.' },
+    about:     { title: 'About — Creator of Collectible Figurines and Funko-style Mini-me in 3D Resin from Portugal | A.Lopes Doodles', description: 'The story behind A.Lopes Doodles — collectible figurines and Funko-style mini-me 3D resin printed and laser engraving from Portugal.' },
     contact:   { title: 'Contact — Orders for Figurines, Funko-style Mini-me and Laser Engraving | A.Lopes Doodles', description: 'Get in touch for orders: collectible figurines, Funko-style mini-me in 3D resin and laser engraving from Portugal.' },
   },
   faq: {

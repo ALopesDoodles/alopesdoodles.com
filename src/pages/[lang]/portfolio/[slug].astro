@@ -76,7 +76,7 @@ const detailDescription = detailDescriptions[lang] ?? detailDescriptions['pt'];
           <h2 class="work-section-label">Resultado Final</h2>
           <div class="result-wrap">
             <button class="lb-trigger" data-src={item.display} data-alt={categoryAlt} aria-label={`Ampliar: ${categoryAlt}`}>
-              <img src={item.display} alt={categoryAlt} class="result-img" />
+              <img src={item.display} alt={categoryAlt} class="result-img" fetchpriority="high" />
             </button>
           </div>
         </div>
