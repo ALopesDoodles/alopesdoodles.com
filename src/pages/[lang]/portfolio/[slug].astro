@@ -20,12 +20,31 @@ const { item } = Astro.props;
 const tr = t(lang);
 
 const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portfolio.filter] ?? item.category;
+
+const categoryAltMap: Record<string, string> = {
+  miniEu:       'Figura mini-eu estilo Funko impressa em resina 3D',
+  collectibles: 'Estatueta colecionável impressa em resina 3D',
+  laser:        'Gravação laser personalizada',
+  tabletop:     'Miniatura tabletop',
+  cosplay:      'Peça cosplay impressa em 3D',
+  custom:       'Peça customizável',
+};
+const categoryAlt = categoryAltMap[item.category] ?? categoryLabel;
+
+const detailTitle = `${categoryLabel} #${item.num} — A.Lopes Doodles`;
+
+const detailDescriptions: Record<string, string> = {
+  pt: `${categoryLabel} feito à mão em Portugal. Vê o processo de criação e o resultado final — cada peça é única.`,
+  es: `${categoryLabel} hecho a mano en Portugal. Ve el proceso de creación y el resultado final — cada pieza es única.`,
+  en: `${categoryLabel} handmade in Portugal. See the creation process and the final result — every piece is unique.`,
+};
+const detailDescription = detailDescriptions[lang] ?? detailDescriptions['pt'];
 ---
 
 <Layout
   lang={lang}
-  title={`${categoryLabel} — A.Lopes Doodles`}
-  description={categoryLabel}
+  title={detailTitle}
+  description={detailDescription}
   canonicalPath={`/${lang}/portfolio/${slug}`}
 >
   <Header lang={lang} currentPage="portfolio" tr={tr} />
@@ -41,6 +60,7 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
           {tr.portfolio.heading}
         </a>
         <div class="work-meta">
+          <h1 class="work-title">{categoryLabel} <span class="work-num">#{item.num}</span></h1>
           <span class="category-badge">{categoryLabel}</span>
         </div>
       </div>
@@ -55,8 +75,8 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
         <div class="work-section">
           <h2 class="work-section-label">Resultado Final</h2>
           <div class="result-wrap">
-            <button class="lb-trigger" data-src={item.display} data-alt={categoryLabel} aria-label={`Ampliar: ${categoryLabel}`}>
-              <img src={item.display} alt={categoryLabel} class="result-img" />
+            <button class="lb-trigger" data-src={item.display} data-alt={categoryAlt} aria-label={`Ampliar: ${categoryAlt}`}>
+              <img src={item.display} alt={categoryAlt} class="result-img" />
             </button>
           </div>
         </div>
@@ -67,8 +87,8 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
             <h2 class="work-section-label">Processo de Criação</h2>
             <div class="process-grid">
               {item.process.map((src, i) => (
-                <button class="lb-trigger process-trigger" data-src={src} data-alt={`Processo ${i + 1}`} aria-label={`Ampliar processo ${i + 1}`}>
-                  <img src={src} alt={`Processo ${i + 1}`} class="process-img" loading="lazy" />
+                <button class="lb-trigger process-trigger" data-src={src} data-alt={`${categoryAlt} — processo ${i + 1}`} aria-label={`Ampliar processo ${i + 1}`}>
+                  <img src={src} alt={`${categoryAlt} — processo ${i + 1}`} class="process-img" loading="lazy" />
                 </button>
               ))}
             </div>
@@ -81,8 +101,8 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
             <h2 class="work-section-label">Fotografias</h2>
             <div class="photos-grid">
               {item.final.map((src, i) => (
-                <button class="lb-trigger photo-trigger" data-src={src} data-alt={`Fotografia ${i + 1}`} aria-label={`Ampliar fotografia ${i + 1}`}>
-                  <img src={src} alt={`Fotografia ${i + 1}`} class="photo-img" loading="lazy" />
+                <button class="lb-trigger photo-trigger" data-src={src} data-alt={`${categoryAlt} — fotografia ${i + 1}`} aria-label={`Ampliar fotografia ${i + 1}`}>
+                  <img src={src} alt={`${categoryAlt} — fotografia ${i + 1}`} class="photo-img" loading="lazy" />
                 </button>
               ))}
             </div>
@@ -155,6 +175,18 @@ const categoryLabel = tr.portfolio.filter[item.category as keyof typeof tr.portf
   .back-link:hover { color: var(--navy); }
 
   .work-meta { margin-bottom: 0.75rem; }
+
+  .work-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .work-num {
+    color: var(--terracotta);
+    font-size: 0.85em;
+  }
 
   .category-badge {
     display: inline-block;

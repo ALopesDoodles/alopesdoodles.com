@@ -21,6 +21,15 @@ const siteUrl   = 'https://alopesdoodles.com';
 const canonical = canonicalPath ? `${siteUrl}${canonicalPath}` : `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
+// Hreflang
+const currentPath = canonicalPath ?? Astro.url.pathname;
+const pathSuffix  = currentPath.replace(new RegExp(`^/${lang}`), '');
+const hreflangUrls = {
+  pt: `${siteUrl}/pt${pathSuffix}`,
+  es: `${siteUrl}/es${pathSuffix}`,
+  en: `${siteUrl}/en${pathSuffix}`,
+};
+
 const localeMap: Record<string, string> = { pt: 'pt_PT', es: 'es_ES', en: 'en_US' };
 const ogLocale = localeMap[lang] ?? 'pt_PT';
 
@@ -29,7 +38,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'A.Lopes Doodles',
-  description: 'Impressão 3D, Gravação Laser e Pintura. Trabalhos elaborados por quem ama o que faz.',
+  description: 'Estatuetas colecionáveis e figuras mini-eu estilo Funko impressas em resina 3D, gravação laser em Portugal.',
   url: siteUrl,
   image: ogImageUrl,
   logo: ogImageUrl,
@@ -61,6 +70,12 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang (multilingual) -->
+    <link rel="alternate" hreflang="pt-PT" href={hreflangUrls.pt} />
+    <link rel="alternate" hreflang="es-ES" href={hreflangUrls.es} />
+    <link rel="alternate" hreflang="en"    href={hreflangUrls.en} />
+    <link rel="alternate" hreflang="x-default" href={hreflangUrls.pt} />
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp, etc.) -->
     <meta property="og:type"        content="website" />

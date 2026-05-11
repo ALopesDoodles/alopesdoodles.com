@@ -8,6 +8,15 @@ interface Props {
 }
 
 const { tr, lang } = Astro.props;
+
+const categoryAltMap: Record<string, string> = {
+  miniEu:       'Figura mini-eu estilo Funko impressa em resina 3D',
+  collectibles: 'Estatueta colecionável impressa em resina 3D',
+  laser:        'Gravação laser personalizada',
+  tabletop:     'Miniatura tabletop',
+  cosplay:      'Peça cosplay impressa em 3D',
+  custom:       'Peça customizável',
+};
 ---
 
 <div class="gallery-section">
@@ -29,12 +38,13 @@ const { tr, lang } = Astro.props;
 
     <div class="gallery-grid" id="gallery-grid" role="list">
       {galleryItems.map(item => {
-        const label = tr.portfolio.filter[item.category as keyof typeof tr.portfolio.filter] ?? item.category;
+        const label  = tr.portfolio.filter[item.category as keyof typeof tr.portfolio.filter] ?? item.category;
+        const altText = categoryAltMap[item.category] ?? label;
         return (
           <article class="gallery-item" data-category={item.category} role="listitem">
-            <a class="gi-link" href={`/${lang}/portfolio/${item.slug}`} aria-label={label}>
+            <a class="gi-link" href={`/${lang}/portfolio/${item.slug}`} aria-label={altText}>
               <div class="gi-media">
-                <img src={item.display} alt={label} class="gi-img" loading="lazy" />
+                <img src={item.display} alt={altText} class="gi-img" loading="lazy" />
                 <div class="gi-overlay">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="10" cy="10" r="8"/>

@@ -16,7 +16,8 @@ const { tr, lang } = Astro.props;
       <p class="label hero-badge">{tr.hero.badge}</p>
 
       <h1 class="hero-title" id="hero-title">
-        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" />
+        <span class="sr-only">{tr.seo.home.title}</span>
+        <img src="/logo.png" alt="A.Lopes Doodles" class="hero-logo-img" aria-hidden="true" />
       </h1>
 
       <p class="hero-tagline">{tr.hero.tagline}</p>
@@ -80,6 +81,18 @@ const { tr, lang } = Astro.props;
     max-width: 38rem;
     margin-bottom: 2.5rem;
     line-height: 1.75;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
